@@ -143,7 +143,8 @@
                 </ul>
             </nav>
             <div class="main-sidebar">
-                <x-sidebar title="Test" />
+                <x-sidebar title="{{ auth()->user()->roles[0]->name }}"
+                    shortTitle="{{ auth()->user()->roles[0]->short_name }}" />
                 {{-- @include('layouts.sidebar') --}}
             </div>
 
