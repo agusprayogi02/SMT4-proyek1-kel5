@@ -38,27 +38,27 @@ class FortifyServiceProvider extends ServiceProvider
 
         //register
         Fortify::registerView(function () {
-            return view('auth.register');
+            return view('auth.register', ['title' => 'Register']);
         });
 
         //login
         Fortify::loginView(function () {
-            return view('auth.login');
+            return view('auth.login', ['title' => 'Login']);
         });
 
         //forgot
         Fortify::requestPasswordResetLinkView(function () {
-            return view('auth.forgot-password');
+            return view('auth.forgot-password', ['title' => 'Forgot Password']);
         });
 
         //reset
         Fortify::resetPasswordView(function ($request) {
-            return view('auth.reset-password', ['request' => $request]);
+            return view('auth.reset-password', ['request' => $request, 'title' => 'Reset Password']);
         });
 
         //verify account
         Fortify::verifyEmailView(function () {
-            return view('auth.verify');
+            return view('auth.verify', ['title' => 'Verify Email']);
         });
     }
 }
