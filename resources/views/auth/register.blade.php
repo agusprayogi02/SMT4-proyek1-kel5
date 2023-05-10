@@ -7,6 +7,7 @@
         <div class="card-header">
             <h4>Register</h4>
         </div>
+        @include('layouts.alert')
         <div class="card-body">
             <form action="{{ route('register') }}" method="POST">
                 @csrf
@@ -67,6 +68,21 @@
                             @enderror
                         </div>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select name="role" id="role" class="form-control">
+                        <option>Pilih Role</option>
+                        @foreach ($roles as $role)
+                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('role')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
                 </div>
 
                 <div class="form-group">

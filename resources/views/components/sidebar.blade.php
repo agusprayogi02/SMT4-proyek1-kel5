@@ -1,9 +1,9 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-        <a href="index.html">{{ $title }}</a>
+        <a href="/dashboard">{{ $title }}</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-        <a href="index.html">{{ $shortTitle }}</a>
+        <a href="/dashboard">{{ $shortTitle }}</a>
     </div>
     <ul class="sidebar-menu">
         @foreach ($menuGroups as $item)
@@ -15,7 +15,7 @@
                 @foreach ($item->menuItems as $menuItem)
                 @can($menuItem->permission_name)
                 <li>
-                    <a class="nav-link " href="{{ url($menuItem->route) }}">{{ $menuItem->name }}</a>
+                    <a class="nav-link" href="{{ url($menuItem->route) }}">{{ $menuItem->name }}</a>
                 </li>
                 @endcan
                 @endforeach
