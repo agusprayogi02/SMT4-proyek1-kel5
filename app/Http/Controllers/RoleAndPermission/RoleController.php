@@ -55,6 +55,7 @@ class RoleController extends Controller
     {
         Role::create([
             'name' => $request->name,
+            'short_name' => $request->short_name,
             'guard_name' => $request->guard_name ?? 'web',
         ]);
         return redirect()->route('role.index')->with('success', 'Role Created Successfully');

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dudi;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class LaporanHarianController extends Controller
+class DudiController extends Controller
 {
     /**
      * Display a listing of the resource.

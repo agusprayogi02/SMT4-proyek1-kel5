@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Nilai;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class LaporanHarianController extends Controller
+class NilaiController extends Controller
 {
     /**
      * Display a listing of the resource.

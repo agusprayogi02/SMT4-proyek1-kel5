@@ -73,7 +73,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'menu-item.destroy']);
 
         // create roles 
-        $roleUser = Role::create(['name' => 'user']);
+        $roleUser = Role::create(['name' => 'user', 'short_name' => 'SR']);
         $roleUser->givePermissionTo([
             'dashboard',
             'user.management',
@@ -81,7 +81,7 @@ class RoleAndPermissionSeeder extends Seeder
         ]);
 
         // create Super Admin
-        $role = Role::create(['name' => 'super-admin']);
+        $role = Role::create(['name' => 'super-admin', 'short_name' => 'SA']);
         $role->givePermissionTo(Permission::all());
 
         //assign user id 1 ke super admin

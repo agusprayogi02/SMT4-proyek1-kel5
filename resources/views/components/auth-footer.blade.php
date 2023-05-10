@@ -1,3 +1,3 @@
 <div class="simple-footer">
-  Copyright &copy; PKLand
+    Copyright &copy; PKLand
 </div>

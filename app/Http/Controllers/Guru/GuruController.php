@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Guru;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class LaporanHarianController extends Controller
+class GuruController extends Controller
 {
     /**
      * Display a listing of the resource.

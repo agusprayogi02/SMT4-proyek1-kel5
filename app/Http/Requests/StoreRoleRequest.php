@@ -26,7 +26,8 @@ class StoreRoleRequest extends FormRequest
         return [
             //
             'name' => 'string|required',
-            'guard_name'=>'string'
+            'short_name' => 'string|required|max:2',
+            'guard_name' => 'string'
         ];
     }
 }

@@ -25,8 +25,9 @@ class UpdateRoleRequest extends FormRequest
     {
         return [
             //
-            'name'=>'required',
-            'guard_name'=>'string'
+            'name' => 'required',
+            'short_name' => 'string|required|max:2',
+            'guard_name' => 'string'
         ];
     }
 }

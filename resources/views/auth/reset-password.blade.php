@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-    @include('layouts.logo')
+    <x-logo />
     <div class="card card-primary">
         <div class="card-header">
             <h4>Reset Password</h4>
@@ -62,6 +62,6 @@
             </form>
         </div>
     </div>
-    @include('layouts.auth-footer')
+    <x-auth-footer />
 </div>
 @endsection
