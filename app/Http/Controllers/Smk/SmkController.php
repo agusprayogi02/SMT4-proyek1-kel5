@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Smk;
 
 use App\Http\Controllers\Controller;
+use App\Models\Smk;
 use Illuminate\Http\Request;
 
 class SmkController extends Controller
@@ -14,7 +15,10 @@ class SmkController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'smk' => Smk::paginate(10)
+        ];
+        return view('users.smk.index', $data);
     }
 
     /**
@@ -24,7 +28,7 @@ class SmkController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.smk.form');
     }
 
     /**

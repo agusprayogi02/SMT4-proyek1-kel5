@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dudi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dudi;
 use Illuminate\Http\Request;
 
 class DudiController extends Controller
@@ -14,7 +15,10 @@ class DudiController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'dudi' => Dudi::paginate(10)
+        ];
+        return view('users.dudi.index', $data);
     }
 
     /**
@@ -24,7 +28,7 @@ class DudiController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.dudi.form');
     }
 
     /**

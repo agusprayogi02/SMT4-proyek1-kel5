@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
+use App\Models\Guru;
 use Illuminate\Http\Request;
 
 class GuruController extends Controller
@@ -14,7 +15,10 @@ class GuruController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'guru' => Guru::paginate(10)
+        ];
+        return view('users.guru.index', $data);
     }
 
     /**
@@ -24,7 +28,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.guru.form');
     }
 
     /**

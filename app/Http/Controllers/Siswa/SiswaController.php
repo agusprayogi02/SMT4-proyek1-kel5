@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -14,7 +15,10 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'siswa' => Siswa::paginate(10)
+        ];
+        return view('users.siswa.index', $data);
     }
 
     /**
@@ -24,7 +28,7 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.siswa.form');
     }
 
     /**
