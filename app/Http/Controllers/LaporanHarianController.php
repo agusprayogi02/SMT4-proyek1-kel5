@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LaporanHarian;
 use Illuminate\Http\Request;
 
 class LaporanHarianController extends Controller
@@ -13,7 +14,10 @@ class LaporanHarianController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'laporan' => LaporanHarian::paginate(10)
+        ];
+        return view('laporan.harian.index', $data);
     }
 
     /**
@@ -23,7 +27,7 @@ class LaporanHarianController extends Controller
      */
     public function create()
     {
-        //
+        return view('laporan.harian.form');
     }
 
     /**
@@ -56,7 +60,9 @@ class LaporanHarianController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('laporan.harian.form', [
+            'laporan' => LaporanHarian::where('id', $id)->first(),
+        ]);
     }
 
     /**

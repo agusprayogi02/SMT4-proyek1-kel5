@@ -25,6 +25,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'user.management']);
         Permission::create(['name' => 'role.permission.management']);
         Permission::create(['name' => 'menu.management']);
+        Permission::create(['name' => 'laporan.harian.management']);
         //user
         Permission::create(['name' => 'user.index']);
         Permission::create(['name' => 'user.create']);
@@ -72,6 +73,14 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'menu-item.edit']);
         Permission::create(['name' => 'menu-item.destroy']);
 
+        //laporan harian
+        Permission::create(['name' => 'laporan-harian.index']);
+        Permission::create(['name' => 'laporan-harian.create']);
+        Permission::create(['name' => 'laporan-harian.edit']);
+        Permission::create(['name' => 'laporan-harian.destroy']);
+        // Permission::create(['name' => 'laporan-harian.import']);
+        // Permission::create(['name' => 'laporan-harian.export']);
+
         // create roles 
         $role = Role::create(['name' => 'Super-Admin', 'short_name' => 'SA']);
         $roleSmk = Role::create(['name' => 'SMK', 'short_name' => 'SK']);
@@ -82,6 +91,11 @@ class RoleAndPermissionSeeder extends Seeder
             'dashboard',
             'user.management',
             'user.index',
+            'laporan.harian.management',
+            'laporan-harian.index',
+            'laporan-harian.create',
+            'laporan-harian.edit',
+            'laporan-harian.destroy',
         ]);
 
         // create Super Admin

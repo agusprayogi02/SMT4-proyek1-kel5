@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DemoController;
+use App\Http\Controllers\LaporanHarianController;
 use App\Http\Controllers\Menu\MenuGroupController;
 use App\Http\Controllers\Menu\MenuItemController;
 use App\Http\Controllers\RoleAndPermission\AssignPermissionController;
@@ -35,8 +36,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', function () {
         return view('home', ['users' => User::get(),]);
     });
-    //user list
 
+    // laporan harian list
+    Route::resource('laporan-harian', LaporanHarianController::class)->names('laporan.harian');
+
+    //user list
     Route::prefix('user-management')->group(function () {
         Route::resource('user', UserController::class);
         Route::post('import', [UserController::class, 'import'])->name('user.import');

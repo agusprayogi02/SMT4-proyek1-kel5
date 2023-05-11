@@ -66,6 +66,12 @@ class MenuItemSeeder extends Seeder
                     'permission_name' => 'menu-item.index',
                     'menu_group_id' => 4,
                 ],
+                [
+                    'name' => 'Menu Laporan Harian',
+                    'route' => 'laporan-harian',
+                    'permission_name' => 'laporan-harian.index',
+                    'menu_group_id' => 5,
+                ],
             ]
         );
     }
