@@ -28,7 +28,10 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('users.siswa.form');
+        $data = [
+            'agama' => ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu'],
+        ];
+        return view('users.siswa.form', $data);
     }
 
     /**
@@ -61,7 +64,11 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [
+            'agama' => ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu'],
+            'siswa' => Siswa::find($id)
+        ];
+        return view('users.siswa.form', $data);
     }
 
     /**

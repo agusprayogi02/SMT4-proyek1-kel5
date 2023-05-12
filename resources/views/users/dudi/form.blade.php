@@ -21,8 +21,8 @@
                 <div class="card-body">
                     @csrf
                     {!! isset($dudi) ? method_field('PUT') : '' !!}
-                    <x-form.input name="nib" :value="isset($dudi) ? $dudi->nib : ''" label="nib" ::readonly />
-                    <x-form.input name="nama" :value="isset($dudi) ? $dudi->nama : ''" label="nama" />
+                    <x-form.input name="nib" :value="isset($dudi) ? $dudi->nib : ''" label="nib" readonly />
+                    <x-form.input name="name" :value="isset($user) ? $user->name : ''" label="nama" />
                     <x-form.input name="nama_pemilik" :value="isset($dudi) ? $dudi->nama_pemilik : ''"
                         label="nama_pemilik" />
                     <x-form.input name="alamat" :value="isset($dudi) ? $dudi->alamat : ''" label="alamat" />
