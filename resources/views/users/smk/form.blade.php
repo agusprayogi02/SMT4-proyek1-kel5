@@ -13,19 +13,19 @@
         <div class="section-body">
             <h2 class="section-title">{{ isset($smk) ? 'Edit' : 'Buat' }} SMK </h2>
             <div class="card">
-                <form action="{{ isset($smk) ? route('users.smk.update', $smk) : route('users.smk.store') }}"
-                    method="{{ isset($smk) ? 'GET' : 'POST' }}">
+                <form action="{{ isset($smk) ? route('smk.update', $smk) : route('smk.store') }}" method="POST">
                     <div class="card-header">
-                        <h4>Validasi {{ isset($smk) ? 'Edit' : 'Buat' }} Data User</h4>
+                        <h4>Validasi {{ isset($smk) ? 'Edit' : 'Buat' }} Data SMK</h4>
                     </div>
                     <div class="card-body">
                         @csrf
                         {!! isset($smk) ? method_field('PUT') : '' !!}
-                        <x-form.input name="npsn" :value="isset($smk) ? $smk->npsn : ''" label="Npsn" />
-                        <x-form.input name="nama" :value="isset($smk) ? $smk->nama : ''" label="Nama" />
-                        <x-form.input name="kepala_sekolah" :value="isset($smk) ? $smk->kepala_sekolah : ''" label="kepala_sekolah" />
-                        <x-form.input name="alamat" :value="isset($smk) ? $smk->alamat : ''" label="Alamat" />
-                        <x-form.input name="no_telp" :value="isset($smk) ? $smk->no_telp : ''" label="No_telp" />
+                        <x-form.input name="npsn" :value="isset($smk) ? $smk->npsn : ''" label="NPSN" @isset($smk)
+                            disabled @endisset />
+                        <x-form.input name="name" :value="isset($user) ? $user->name : ''" label="Nama" />
+                        <x-form.input name="kepala_sekolah" :value="isset($smk) ? $smk->kepala_sekolah : ''" label="Kepala Sekolah" />
+                        <x-form.text-area name="alamat" :value="isset($smk) ? $smk->alamat : ''" label="Alamat" />
+                        <x-form.input name="no_telp" :value="isset($smk) ? $smk->no_telp : ''" label="No Telp" />
                     </div>
                     <div class="card-footer text-right">
                         <button class="btn btn-primary">Submit</button>

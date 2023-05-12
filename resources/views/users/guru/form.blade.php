@@ -13,19 +13,19 @@
         <div class="section-body">
             <h2 class="section-title">{{ isset($guru) ? 'Edit' : 'Buat' }} Guru</h2>
             <div class="card">
-                <form action="{{ isset($guru) ? route('users.guru.update', $guru) : route('users.guru.store') }}"
-                    method="{{ isset($guru) ? 'GET' : 'POST' }}">
+                <form action="{{ isset($guru) ? route('guru.update', $guru) : route('guru.store') }}" method="POST">
                     <div class="card-header">
-                        <h4>Validasi {{ isset($guru) ? 'Edit' : 'Buat' }} Data User</h4>
+                        <h4>Validasi {{ isset($guru) ? 'Edit' : 'Buat' }} Data Guru</h4>
                     </div>
                     <div class="card-body">
                         @csrf
                         {!! isset($guru) ? method_field('PUT') : '' !!}
-                        <x-form.input name="nip" :value="isset($guru) ? $guru->nip : ''" label="Nip" />
-                        <x-form.input name="nama" :value="isset($guru) ? $guru->nama : ''" label="Nama" />
-                        {{-- <x-form.input name="smk_id" :value="isset($guru) ? $guru->smk->id : ''" label="Smk_id" /> --}}
-                        <x-form.input name="alamat" :value="isset($guru) ? $guru->alamat : ''" label="Alamat" />
-                        <x-form.input name="no_telp" :value="isset($guru) ? $guru->no_telp : ''" label="No_telp" />
+                        <x-form.input name="nip" :value="isset($guru) ? $guru->nip : ''" label="NIP" @isset($guru)
+                            readonly @endisset />
+                        <x-form.input name="name" :value="isset($user) ? $user->name : ''" label="Nama" />
+                        {{-- <x-form.select name="smk_id" :value="isset($guru) ? $guru->smk->id : ''" label="Asal SMK" /> --}}
+                        <x-form.text-area name="alamat" :value="isset($guru) ? $guru->alamat : ''" label="Alamat" />
+                        <x-form.input name="no_telp" :value="isset($guru) ? $guru->no_telp : ''" label="No Telp" />
                     </div>
                     <div class="card-footer text-right">
                         <button class="btn btn-primary">Submit</button>
