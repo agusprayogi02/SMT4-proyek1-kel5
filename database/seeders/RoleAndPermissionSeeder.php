@@ -24,8 +24,11 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'dashboard']);
         Permission::create(['name' => 'user.management']);
         Permission::create(['name' => 'role.permission.management']);
-        Permission::create(['name' => 'menu.management']);
+        Permission::create(['name' => 'magang.management']);
+        Permission::create(['name' => 'edukasi.management']);
         Permission::create(['name' => 'laporan.harian.management']);
+        Permission::create(['name' => 'menu.management']);
+
         //user
         Permission::create(['name' => 'user.index']);
         Permission::create(['name' => 'user.create']);
@@ -80,6 +83,79 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'laporan-harian.destroy']);
         // Permission::create(['name' => 'laporan-harian.import']);
         // Permission::create(['name' => 'laporan-harian.export']);
+
+        // smk
+        Permission::create(['name' => 'smk.index']);
+        Permission::create(['name' => 'smk.create']);
+        Permission::create(['name' => 'smk.edit']);
+        Permission::create(['name' => 'smk.destroy']);
+        // Permission::create(['name' => 'smk.import']);
+        // Permission::create(['name' => 'smk.export']);
+
+        // guru
+        Permission::create(['name' => 'guru.index']);
+        Permission::create(['name' => 'guru.create']);
+        Permission::create(['name' => 'guru.edit']);
+        Permission::create(['name' => 'guru.destroy']);
+        // Permission::create(['name' => 'guru.import']);
+        // Permission::create(['name' => 'guru.export']);
+
+        // kelas
+        Permission::create(['name' => 'kelas.index']);
+        Permission::create(['name' => 'kelas.create']);
+        Permission::create(['name' => 'kelas.edit']);
+        Permission::create(['name' => 'kelas.destroy']);
+        // Permission::create(['name' => 'kelas.import']);
+        // Permission::create(['name' => 'kelas.export']);
+
+        // siswa
+        Permission::create(['name' => 'siswa.index']);
+        Permission::create(['name' => 'siswa.create']);
+        Permission::create(['name' => 'siswa.edit']);
+        Permission::create(['name' => 'siswa.destroy']);
+        // Permission::create(['name' => 'siswa.import']);
+        // Permission::create(['name' => 'siswa.export']);
+
+        // dudi
+        Permission::create(['name' => 'dudi.index']);
+        Permission::create(['name' => 'dudi.create']);
+        Permission::create(['name' => 'dudi.edit']);
+        Permission::create(['name' => 'dudi.destroy']);
+        // Permission::create(['name' => 'dudi.import']);
+        // Permission::create(['name' => 'dudi.export']);
+
+        // nilai
+        Permission::create(['name' => 'nilai.index']);
+        Permission::create(['name' => 'nilai.create']);
+        Permission::create(['name' => 'nilai.edit']);
+        Permission::create(['name' => 'nilai.destroy']);
+        // Permission::create(['name' => 'nilai.import']);
+        // Permission::create(['name' => 'nilai.export']);
+
+        // nilai kategori
+        Permission::create(['name' => 'nilai.kategori.index']);
+        Permission::create(['name' => 'nilai.kategori.create']);
+        Permission::create(['name' => 'nilai.kategori.edit']);
+        Permission::create(['name' => 'nilai.kategori.destroy']);
+        // Permission::create(['name' => 'nilai.kategori.import']);
+        // Permission::create(['name' => 'nilai.kategori.export']);
+
+        // magang
+        Permission::create(['name' => 'magang.index']);
+        Permission::create(['name' => 'magang.create']);
+        Permission::create(['name' => 'magang.edit']);
+        Permission::create(['name' => 'magang.destroy']);
+        // Permission::create(['name' => 'magang.import']);
+        // Permission::create(['name' => 'magang.export']);
+
+        // keahlian
+        Permission::create(['name' => 'keahlian.index']);
+        Permission::create(['name' => 'keahlian.create']);
+        Permission::create(['name' => 'keahlian.edit']);
+        Permission::create(['name' => 'keahlian.destroy']);
+        // Permission::create(['name' => 'keahlian.import']);
+        // Permission::create(['name' => 'keahlian.export']);
+
 
         // create roles 
         $role = Role::create(['name' => 'Super-Admin', 'short_name' => 'SA']);

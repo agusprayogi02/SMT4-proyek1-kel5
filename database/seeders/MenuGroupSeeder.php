@@ -34,15 +34,25 @@ class MenuGroupSeeder extends Seeder
                     'permisison_name' => 'role.permission.management',
                 ],
                 [
+                    'name' => 'Edukasi Management',
+                    'icon' => 'fas fa-graduation-cap',
+                    'permisison_name' => 'edukasi.management',
+                ],
+                [
+                    'name' => 'Magang Management',
+                    'icon' => 'fas fa-briefcase',
+                    'permisison_name' => 'magang.management',
+                ],
+                [
+                    'name' => 'Laporan Harian Management',
+                    'icon' => 'fas fa-book',
+                    'permisison_name' => 'laporan.harian.management',
+                ],
+                [
                     'name' => 'Menu Management',
                     'icon' => 'fas fa-bars',
                     'permisison_name' => 'menu.management',
                 ],
-                [
-                    'name' => 'Laporan Harian Siswa Management',
-                    'icon' => 'fa-solid fa-book-user',
-                    'permisison_name' => 'laporan.harian.management',
-                ]
             ]
         );
     }

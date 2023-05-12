@@ -25,9 +25,21 @@ class MenuItemSeeder extends Seeder
                     'menu_group_id' => 1,
                 ],
                 [
-                    'name' => 'User List',
+                    'name' => 'Menu Users',
                     'route' => 'user-management/user',
                     'permission_name' => 'user.index',
+                    'menu_group_id' => 2,
+                ],
+                [
+                    'name' => 'Menu Siswa',
+                    'route' => 'siswa',
+                    'permission_name' => 'siswa.index',
+                    'menu_group_id' => 2,
+                ],
+                [
+                    'name' => 'Menu Guru',
+                    'route' => 'guru',
+                    'permission_name' => 'guru.index',
                     'menu_group_id' => 2,
                 ],
                 [
@@ -55,22 +67,52 @@ class MenuItemSeeder extends Seeder
                     'menu_group_id' => 3,
                 ],
                 [
-                    'name' => 'Menu Group',
-                    'route' => 'menu-management/menu-group',
-                    'permission_name' => 'menu-group.index',
+                    'name' => 'Menu Kelas',
+                    'route' => 'kelas',
+                    'permission_name' => 'kelas.index',
                     'menu_group_id' => 4,
                 ],
                 [
-                    'name' => 'Menu Item',
-                    'route' => 'menu-management/menu-item',
-                    'permission_name' => 'menu-item.index',
+                    'name' => 'Menu Keahlian',
+                    'route' => 'keahlian',
+                    'permission_name' => 'keahlian.index',
                     'menu_group_id' => 4,
+                ],
+                [
+                    'name' => 'Menu Data SMK',
+                    'route' => 'smk',
+                    'permission_name' => 'smk.index',
+                    'menu_group_id' => 4,
+                ],
+                [
+                    'name' => 'Menu Magang',
+                    'route' => 'magang',
+                    'permission_name' => 'magang.index',
+                    'menu_group_id' => 5,
+                ],
+                [
+                    'name' => 'Menu Data DUDI',
+                    'route' => 'dudi',
+                    'permission_name' => 'dudi.index',
+                    'menu_group_id' => 5,
                 ],
                 [
                     'name' => 'Menu Laporan Harian',
                     'route' => 'laporan-harian',
                     'permission_name' => 'laporan-harian.index',
-                    'menu_group_id' => 5,
+                    'menu_group_id' => 6,
+                ],
+                [
+                    'name' => 'Menu Group',
+                    'route' => 'menu-management/menu-group',
+                    'permission_name' => 'menu-group.index',
+                    'menu_group_id' => 7,
+                ],
+                [
+                    'name' => 'Menu Item',
+                    'route' => 'menu-management/menu-item',
+                    'permission_name' => 'menu-item.index',
+                    'menu_group_id' => 7,
                 ],
             ]
         );

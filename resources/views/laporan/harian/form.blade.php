@@ -14,7 +14,7 @@
     <h2 class="section-title">{{ isset($laporan)?'Edit':'Buat' }} Laporan</h2>
     <div class="card">
       <form action="{{ isset($laporan)?route('laporan.harian.update', $laporan):route('laporan.harian.store') }}"
-        method="{{ isset($laporan)?'GET':'POST' }}">
+        method="POST">
         <div class="card-header">
           <h4>Validasi {{ isset($laporan)?'Edit':'Buat' }} Data User</h4>
         </div>

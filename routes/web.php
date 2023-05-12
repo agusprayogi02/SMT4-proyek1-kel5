@@ -1,9 +1,15 @@
 <?php
 
+use App\Http\Controllers\DaftarMagangController;
 use App\Http\Controllers\DemoController;
+use App\Http\Controllers\Dudi\DudiController;
+use App\Http\Controllers\Guru\GuruController;
+use App\Http\Controllers\KeahlianController;
 use App\Http\Controllers\LaporanHarianController;
 use App\Http\Controllers\Menu\MenuGroupController;
 use App\Http\Controllers\Menu\MenuItemController;
+use App\Http\Controllers\Nilai\NilaiController;
+use App\Http\Controllers\Nilai\NilaiKategoriController;
 use App\Http\Controllers\RoleAndPermission\AssignPermissionController;
 use App\Http\Controllers\RoleAndPermission\AssignUserToRoleController;
 use App\Http\Controllers\RoleAndPermission\ExportPermissionController;
@@ -12,6 +18,9 @@ use App\Http\Controllers\RoleAndPermission\ImportPermissionController;
 use App\Http\Controllers\RoleAndPermission\ImportRoleController;
 use App\Http\Controllers\RoleAndPermission\PermissionController;
 use App\Http\Controllers\RoleAndPermission\RoleController;
+use App\Http\Controllers\Siswa\KelasController;
+use App\Http\Controllers\Siswa\SiswaController;
+use App\Http\Controllers\Smk\SmkController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Http\Controllers\UserController;
@@ -39,6 +48,23 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // laporan harian list
     Route::resource('laporan-harian', LaporanHarianController::class)->names('laporan.harian');
+
+    // data users
+    Route::resource('smk', SmkController::class)->names('smk');
+    Route::resource('guru', GuruController::class)->names('guru');
+    Route::resource('dudi', DudiController::class)->names('dudi');
+    Route::resource('siswa', SiswaController::class)->names('siswa');
+
+    // magang
+    Route::resource('magang', DaftarMagangController::class)->names('magang');
+
+    // nilai
+    Route::resource('nilai', NilaiController::class)->names('nilai');
+    Route::resource('nilai/kategori', NilaiKategoriController::class)->names('nilai.kategori');
+
+    // kelas
+    Route::resource('kelas', KelasController::class)->names('kelas');
+    Route::resource('keahlian', KeahlianController::class)->names('keahlian');
 
     //user list
     Route::prefix('user-management')->group(function () {
