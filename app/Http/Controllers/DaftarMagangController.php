@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DaftarMagang;
+use App\Models\Dudi;
+use App\Models\Guru;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class DaftarMagangController extends Controller
@@ -13,7 +17,7 @@ class DaftarMagangController extends Controller
      */
     public function index()
     {
-        //
+        return view('magang.index', ['magang' => DaftarMagang::paginate(10)]);
     }
 
     /**
@@ -23,7 +27,12 @@ class DaftarMagangController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            "siswa" => Siswa::paginate(30),
+            "dudi" => Dudi::all(),
+            "guru" => Guru::all(),
+        ];
+        return view('magang.form', $data);
     }
 
     /**
@@ -56,7 +65,7 @@ class DaftarMagangController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('magang.form', ['magang' => DaftarMagang::find($id)]);
     }
 
     /**

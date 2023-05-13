@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Keahlian;
 use Illuminate\Http\Request;
 
 class KeahlianController extends Controller
@@ -13,7 +14,10 @@ class KeahlianController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'keahlian' => Keahlian::paginate(10)
+        ];
+        return view('keahlian.index', $data);
     }
 
     /**
@@ -23,7 +27,7 @@ class KeahlianController extends Controller
      */
     public function create()
     {
-        //
+        return view('keahlian.form');
     }
 
     /**

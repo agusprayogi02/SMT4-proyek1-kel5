@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nama_pemilik', 50);
             $table->string('alamat', 200);
             $table->string('no_telp', 15);
+            $table->integer('kuota');
             $table->timestamp('verified_at')->nullable();
             $table->timestamps();
         });
