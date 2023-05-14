@@ -15,7 +15,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- CSS Libraries -->
-  <link rel="stylesheet" href="../node_modules/selectric/public/selectric.css">
+  <link rel="stylesheet" href="../assets/css/selectric.css">
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="../assets/css/style.css">
@@ -47,8 +47,8 @@
   <script src="../assets/js/stisla.js"></script>
 
   <!-- JS Libraies -->
-  <script src="../node_modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-  <script src="../node_modules/selectric/public/jquery.selectric.min.js"></script>
+  <script src="../assets/js/jquery.pwstrength.min.js"></script>
+  <script src="../assets/js/jquery.selectric.min.js"></script>
 
   <!-- Template JS File -->
   <script src="../assets/js/scripts.js"></script>
@@ -56,6 +56,9 @@
 
   <!-- Page Specific JS File -->
   <script src="../assets/js/page/auth-register.js"></script>
+
+  <!-- Page Specific JS File -->
+  @stack('customScript')
 </body>
 
 </html>

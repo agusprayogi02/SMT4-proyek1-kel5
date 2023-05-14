@@ -17,7 +17,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" value="{{ old('email') }}"
+                    <input type="email" id="email" name="email" value="{{ old('email') }}"
                         class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Alamat Email">
                     @error('email')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -33,8 +33,13 @@
                         </div>
                     </div>
                     <!-- <label class="font-weight-bold text-uppercase">Password</label> -->
-                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                        placeholder="Masukkan Password">
+                    <input type="password" id="password" name="password"
+                        class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password"
+                        data-indicator="pwindicator">
+                    <div id="pwindicator">
+                        <div class="bar"></div>
+                        <div class="label"></div>
+                    </div>
                     @error('password')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -53,3 +58,12 @@
     <x-auth-footer />
 </div>
 @endsection
+
+@push('customScript')
+<script>
+    $(document).ready(function () {
+        $('#email').focus();
+        $("#password").pwstrength();
+    });
+</script>
+@endpush

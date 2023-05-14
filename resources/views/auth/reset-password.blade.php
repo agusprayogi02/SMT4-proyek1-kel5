@@ -39,7 +39,11 @@
                     <input id="password" type="password"
                         class="form-control pwstrength @error('password') is-invalid @enderror"
                         data-indicator="pwindicator" name="password" required autocomplete="new-password"
-                        placeholder="Masukkan Password Baru">
+                        placeholder="Masukkan Password Baru" data-indicator="pwindicator">
+                    <div id="pwindicator">
+                        <div class="bar"></div>
+                        <div class="label"></div>
+                    </div>
                     @error('password')
                     <div class="alert alert-danger mt-2">
                         <strong>{{ $message }}</strong>
@@ -65,3 +69,11 @@
     <x-auth-footer />
 </div>
 @endsection
+
+@push('customScript')
+<script>
+    $(document).ready(function () {
+        $("#password").pwstrength();
+    });
+</script>
+@endpush

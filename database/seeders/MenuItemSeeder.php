@@ -85,15 +85,15 @@ class MenuItemSeeder extends Seeder
                     'menu_group_id' => 4,
                 ],
                 [
-                    'name' => 'Menu Magang',
-                    'route' => 'magang',
-                    'permission_name' => 'magang.index',
-                    'menu_group_id' => 5,
-                ],
-                [
                     'name' => 'Menu Data DUDI',
                     'route' => 'dudi',
                     'permission_name' => 'dudi.index',
+                    'menu_group_id' => 5,
+                ],
+                [
+                    'name' => 'Menu Magang',
+                    'route' => 'magang',
+                    'permission_name' => 'magang.index',
                     'menu_group_id' => 5,
                 ],
                 [
