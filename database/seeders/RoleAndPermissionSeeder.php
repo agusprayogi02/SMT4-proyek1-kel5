@@ -167,7 +167,7 @@ class RoleAndPermissionSeeder extends Seeder
         $roleSiswa->givePermissionTo([
             'dashboard',
             'user.management',
-            'user.index',
+            'siswa.index',
             'magang.management',
             'nilai.index',
             'nilai.show',
