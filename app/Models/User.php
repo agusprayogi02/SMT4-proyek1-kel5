@@ -42,4 +42,28 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // relasi one to one with smk
+    public function smk()
+    {
+        return $this->hasOne(Smk::class, 'user_id', 'id');
+    }
+
+    // relasi one to one with siswa
+    public function siswa()
+    {
+        return $this->hasOne(Siswa::class, 'user_id', 'id');
+    }
+
+    // relasi one to one with guru
+    public function guru()
+    {
+        return $this->hasOne(Guru::class, 'user_id', 'id');
+    }
+
+    // relasi one to one with dudi
+    public function dudi()
+    {
+        return $this->hasOne(Dudi::class, 'user_id', 'id');
+    }
 }

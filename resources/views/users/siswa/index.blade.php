@@ -75,11 +75,11 @@
                                                 @can('siswa.edit')
                                                     <td class="text-right">
                                                         <div class="d-flex justify-content-end">
-                                                            <a href="{{ route('siswa.edit', $item->id) }}"
+                                                            <a href="{{ route('siswa.edit', $item->nisn) }}"
                                                                 class="btn btn-sm btn-info btn-icon "><i
                                                                     class="fas fa-edit"></i>
                                                                 Edit</a>
-                                                            <form action="{{ route('siswa.destroy', $item->id) }}"
+                                                            <form action="{{ route('siswa.destroy', $item->nisn) }}"
                                                                 method="POST" class="ml-2">
                                                                 <input type="hidden" name="_method" value="DELETE">
                                                                 <input type="hidden" name="_token"

@@ -67,18 +67,18 @@
                                             <tr>
                                                 <td>{{ $dudi->firstItem() + $key }}</td>
                                                 <td>{{ $item->nib }}</td>
-                                                <td>{{ $item->user->nama }}</td>
+                                                <td>{{ $item->user->name }}</td>
                                                 <td>{{ $item->nama_pemilik }}</td>
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>{{ $item->no_telp }}</td>
                                                 @can('dudi.edit')
                                                     <td class="text-right">
                                                         <div class="d-flex justify-content-end">
-                                                            <a href="{{ route('dudi.edit', $item->id) }}"
+                                                            <a href="{{ route('dudi.edit', $item->nib) }}"
                                                                 class="btn btn-sm btn-info btn-icon "><i
                                                                     class="fas fa-edit"></i>
                                                                 Edit</a>
-                                                            <form action="{{ route('dudi.destroy', $item->id) }}"
+                                                            <form action="{{ route('dudi.destroy', $item->nib) }}"
                                                                 method="POST" class="ml-2">
                                                                 <input type="hidden" name="_method" value="DELETE">
                                                                 <input type="hidden" name="_token"

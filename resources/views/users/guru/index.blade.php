@@ -72,12 +72,12 @@
                                                 @can('guru.edit')
                                                     <td class="text-right">
                                                         <div class="d-flex justify-content-end">
-                                                            <a href="{{ route('guru.edit', $item->id) }}"
+                                                            <a href="{{ route('guru.edit', $item->nip) }}"
                                                                 class="btn btn-sm btn-info btn-icon "><i
                                                                     class="fas fa-edit"></i>
                                                                 Edit</a>
-                                                            <form action="{{ route('guru.destroy', $item->id) }}" method="POST"
-                                                                class="ml-2">
+                                                            <form action="{{ route('guru.destroy', $item->nip) }}"
+                                                                method="POST" class="ml-2">
                                                                 <input type="hidden" name="_method" value="DELETE">
                                                                 <input type="hidden" name="_token"
                                                                     value="{{ csrf_token() }}">

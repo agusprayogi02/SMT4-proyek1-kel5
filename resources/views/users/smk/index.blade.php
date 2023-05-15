@@ -65,18 +65,18 @@
                                             <tr>
                                                 <td>{{ $smk->firstItem() + $key }}</td>
                                                 <td>{{ $item->npsn }}</td>
-                                                <td>{{ $item->user->nama }}</td>
+                                                <td>{{ $item->user->name }}</td>
                                                 <td>{{ $item->kepala_sekolah }}</td>
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>{{ $item->no_telp }}</td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-end">
-                                                        <a href="{{ route('smk.edit', $item->id) }}"
+                                                        <a href="{{ route('smk.edit', $item->npsn) }}"
                                                             class="btn btn-sm btn-info btn-icon "><i
                                                                 class="fas fa-edit"></i>
                                                             Edit</a>
-                                                        <form action="{{ route('smk.destroy', $item->id) }}" method="POST"
-                                                            class="ml-2">
+                                                        <form action="{{ route('smk.destroy', $item->npsn) }}"
+                                                            method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE">
                                                             <input type="hidden" name="_token"
                                                                 value="{{ csrf_token() }}">
