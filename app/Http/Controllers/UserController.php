@@ -139,12 +139,35 @@ class UserController extends Controller
     {
         // import excel ke data tables
         $users = Excel::toCollection(new UsersImport, $request->import_file);
+        // var_dump($users[0][2]);
+        // die();
         foreach ($users[0] as $user) {
-            User::where('id', $user[0])->update([
-                'name' => $user[1],
-                'email' => $user[2],
-                'password' => $user[3],
-            ]);
+            if (strtolower($user[0]) == 'id' && strtolower($user[1]) == 'nama' && strtolower($user[2]) == 'email' && strtolower($user[3]) == 'password') {
+                continue;
+            } else {
+                if ($user[0] == null) {
+                    User::create([
+                        'name' => $user[1],
+                        'email' => $user[2],
+                        'password' => Hash::make($user[3]),
+                    ]);
+                    continue;
+                }
+                $user = User::where('id', $user[0])->first();
+                if ($user !== null) {
+                    $user->update([
+                        'name' => $user[1],
+                        'email' => $user[2],
+                        'password' => Hash::make($user[3]),
+                    ]);
+                } else {
+                    User::create([
+                        'name' => $user[1],
+                        'email' => $user[2],
+                        'password' => Hash::make($user[3]),
+                    ]);
+                }
+            }
         }
         return redirect()->route('user.index');
     }

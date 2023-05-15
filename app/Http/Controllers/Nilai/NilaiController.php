@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Nilai;
 
 use App\Http\Controllers\Controller;
+use App\Models\Nilai;
 use Illuminate\Http\Request;
 
 class NilaiController extends Controller
@@ -14,7 +15,15 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        //
+        $nilai = Nilai::paginate(10);
+        $user = auth()->user();
+        if (strtolower($user->roles[0]->name) === "siswa") {
+            $nilai = Nilai::where('siswa_id', $user->id)->paginate(10);
+        } else if (strtolower($user->roles[0]->name) === "dudi") {
+            $nilai = Nilai::where('dudi_id', $user->id)->paginate(10);
+        }
+
+        return view('nilai.index', compact('nilai'));
     }
 
     /**
@@ -24,7 +33,6 @@ class NilaiController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -46,7 +54,8 @@ class NilaiController extends Controller
      */
     public function show($id)
     {
-        //
+        $nilai = Nilai::find($id);
+        return view('nilai.show', compact('nilai'));
     }
 
     /**

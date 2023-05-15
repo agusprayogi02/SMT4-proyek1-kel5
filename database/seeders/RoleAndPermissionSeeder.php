@@ -26,8 +26,8 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'role.permission.management']);
         Permission::create(['name' => 'magang.management']);
         Permission::create(['name' => 'edukasi.management']);
-        Permission::create(['name' => 'laporan.harian.management']);
         Permission::create(['name' => 'menu.management']);
+        Permission::create(['name' => 'laporan.harian.management']);
 
         //user
         Permission::create(['name' => 'user.index']);
@@ -129,6 +129,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'nilai.create']);
         Permission::create(['name' => 'nilai.edit']);
         Permission::create(['name' => 'nilai.destroy']);
+        Permission::create(['name' => 'nilai.show']);
         // Permission::create(['name' => 'nilai.import']);
         // Permission::create(['name' => 'nilai.export']);
 
@@ -167,6 +168,9 @@ class RoleAndPermissionSeeder extends Seeder
             'dashboard',
             'user.management',
             'user.index',
+            'magang.management',
+            'nilai.index',
+            'nilai.show',
             'laporan.harian.management',
             'laporan-harian.index',
             'laporan-harian.create',
