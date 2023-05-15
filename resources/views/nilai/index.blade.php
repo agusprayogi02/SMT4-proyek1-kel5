@@ -81,7 +81,7 @@
                                             <th>Nama Siswa</th>
                                             <th>Total</th>
                                             <th>Avg</th>
-                                            @can('nilai.edit')
+                                            @can('nilai.show')
                                                 <th class="text-right">Action</th>
                                             @endcan
                                         </tr>
@@ -91,7 +91,7 @@
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->total }}</td>
                                                 <td>{{ $item->avg }}</td>
-                                                @can('item.edit')
+                                                @can('item.show')
                                                     <td class="text-right">
                                                         <div class="d-flex justify-content-end">
                                                             <a href="{{ route('item.show', $item->id) }}"

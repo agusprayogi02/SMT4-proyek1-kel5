@@ -25,8 +25,10 @@
                         <div class="card-header">
                             <h4>Menu DUDI</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('dudi.create') }}">Create New
-                                    DUDI</a>
+                                @can('dudi.create')
+                                    <a class="btn btn-icon icon-left btn-primary" href="{{ route('dudi.create') }}">Create New
+                                        DUDI</a>
+                                @endcan
                                 <a class="btn btn-info btn-primary active search"> <i class="fa fa-search"
                                         aria-hidden="true"></i> Search DUDI</a>
                             </div>
@@ -57,7 +59,9 @@
                                             <th>Pemilik</th>
                                             <th>Alamat</th>
                                             <th>No. Telp</th>
-                                            <th class="text-right">Action</th>
+                                            @can('dudi.edit')
+                                                <th class="text-right">Action</th>
+                                            @endcan
                                         </tr>
                                         @foreach ($dudi as $key => $item)
                                             <tr>
@@ -67,23 +71,25 @@
                                                 <td>{{ $item->nama_pemilik }}</td>
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>{{ $item->no_telp }}</td>
-                                                <td class="text-right">
-                                                    <div class="d-flex justify-content-end">
-                                                        <a href="{{ route('dudi.edit', $item->id) }}"
-                                                            class="btn btn-sm btn-info btn-icon "><i
-                                                                class="fas fa-edit"></i>
-                                                            Edit</a>
-                                                        <form action="{{ route('dudi.destroy', $item->id) }}"
-                                                            method="POST" class="ml-2">
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <input type="hidden" name="_token"
-                                                                value="{{ csrf_token() }}">
-                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete"><i
-                                                                    class="fas fa-times"></i>
-                                                                Delete </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
+                                                @can('dudi.edit')
+                                                    <td class="text-right">
+                                                        <div class="d-flex justify-content-end">
+                                                            <a href="{{ route('dudi.edit', $item->id) }}"
+                                                                class="btn btn-sm btn-info btn-icon "><i
+                                                                    class="fas fa-edit"></i>
+                                                                Edit</a>
+                                                            <form action="{{ route('dudi.destroy', $item->id) }}"
+                                                                method="POST" class="ml-2">
+                                                                <input type="hidden" name="_method" value="DELETE">
+                                                                <input type="hidden" name="_token"
+                                                                    value="{{ csrf_token() }}">
+                                                                <button class="btn btn-sm btn-danger btn-icon confirm-delete"><i
+                                                                        class="fas fa-times"></i>
+                                                                    Delete </button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                @endcan
                                             </tr>
                                         @endforeach
                                     </tbody>

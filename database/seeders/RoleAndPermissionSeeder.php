@@ -164,11 +164,82 @@ class RoleAndPermissionSeeder extends Seeder
         $roleDudi = Role::create(['name' => 'DUDI', 'short_name' => 'DD']);
         $roleGuru = Role::create(['name' => 'Guru', 'short_name' => 'GR']);
         $roleSiswa = Role::create(['name' => 'Siswa', 'short_name' => 'SW']);
+
+        // give permission
+        $role->givePermissionTo(Permission::all());
+
+        $roleSmk->givePermissionTo([
+            'dashboard',
+            'smk.index',
+            'smk.edit',
+            'user.management',
+            'guru.index',
+            'guru.create',
+            'guru.edit',
+            'guru.destroy',
+            'siswa.index',
+            'siswa.create',
+            'siswa.edit',
+            'siswa.destroy',
+            'dudi.index',
+            'edukasi.management',
+            'kelas.index',
+            'kelas.create',
+            'kelas.edit',
+            'kelas.destroy',
+            'keahlian.index',
+            'keahlian.create',
+            'keahlian.edit',
+            'keahlian.destroy',
+        ]);
+
+        $roleDudi->givePermissionTo([
+            'dashboard',
+            'dudi.index',
+            'dudi.edit',
+            'user.management',
+            'siswa.index',
+            'siswa.create',
+            'siswa.edit',
+            'siswa.destroy',
+            'smk.index',
+            'magang.management',
+            'nilai.index',
+            'nilai.create',
+            'nilai.edit',
+            'nilai.destroy',
+            'laporan.harian.management',
+            'laporan-harian.index',
+            'edukasi.management',
+            'keahlian.index',
+            'keahlian.create',
+            'keahlian.edit',
+            'keahlian.destroy',
+        ]);
+
+        $roleGuru->givePermissionTo([
+            'dashboard',
+            'user.management',
+            'guru.index',
+            'guru.edit',
+            'siswa.index',
+            'magang.management',
+            'nilai.index',
+            'nilai.show',
+            'laporan.harian.management',
+            'laporan-harian.index',
+        ]);
+
         $roleSiswa->givePermissionTo([
             'dashboard',
             'user.management',
             'siswa.index',
+            'siswa.edit',
+            'guru.index',
             'magang.management',
+            'magang.index',
+            'magang.create',
+            'dudi.index',
             'nilai.index',
             'nilai.show',
             'laporan.harian.management',
@@ -178,13 +249,16 @@ class RoleAndPermissionSeeder extends Seeder
             'laporan-harian.destroy',
         ]);
 
-        // create Super Admin
-        $role->givePermissionTo(Permission::all());
-
         //assign user id 1 ke super admin
         $user = User::find(1);
         $user->assignRole('Super-Admin');
         $user = User::find(2);
         $user->assignRole('Siswa');
+        $user = User::find(3);
+        $user->assignRole('SMK');
+        $user = User::find(4);
+        $user->assignRole('Guru');
+        $user = User::find(5);
+        $user->assignRole('DUDI');
     }
 }

@@ -25,8 +25,10 @@
                         <div class="card-header">
                             <h4>Menu SMK</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('smk.create') }}">Create
-                                    New SMK</a>
+                                @can('smk.create')
+                                    <a class="btn btn-icon icon-left btn-primary" href="{{ route('smk.create') }}">Create
+                                        New SMK</a>
+                                @endcan
                                 <a class="btn btn-info btn-primary active search"> <i class="fa fa-search"
                                         aria-hidden="true"></i> Search SMK</a>
                             </div>
