@@ -97,6 +97,18 @@ class MenuItemSeeder extends Seeder
                     'menu_group_id' => 5,
                 ],
                 [
+                    'name' => 'Menu Nilai',
+                    'route' => 'nilai',
+                    'permission_name' => 'nilai.index',
+                    'menu_group_id' => 5,
+                ],
+                [
+                    'name' => 'Menu Kategori Nilai',
+                    'route' => 'nilai.kategori',
+                    'permission_name' => 'nilai.kategori.index',
+                    'menu_group_id' => 5,
+                ],
+                [
                     'name' => 'Menu Laporan Harian',
                     'route' => 'laporan-harian',
                     'permission_name' => 'laporan-harian.index',
