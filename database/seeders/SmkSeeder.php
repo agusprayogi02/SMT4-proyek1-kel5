@@ -18,6 +18,7 @@ class SmkSeeder extends Seeder
         Smk::create([
             'user_id' => 3,
             'npsn' => "12345678",
+            'nama' => "SMK Negeri 1 Malang",
             'alamat' => "Jl. Teluk Pacitan",
             'no_telp' => "0341479164",
             'kepala_sekolah' => "Moh. Guntur",

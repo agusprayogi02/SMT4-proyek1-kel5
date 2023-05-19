@@ -19,6 +19,7 @@ class GuruSeeder extends Seeder
             'user_id' => 4,
             'smk_id' => "12345678",
             'nip' => "123456789012345678",
+            'nama' => "Sumantri",
             'alamat' => "Jl. Raya Soekarno Hatta",
             'no_telp' => "08123456789",
         ]);

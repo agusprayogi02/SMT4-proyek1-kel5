@@ -19,6 +19,7 @@ class SiswaSeeder extends Seeder
             'user_id' => 4,
             'kelas_id' => 1,
             'smk_id' => "12345678",
+            'nama' => "Siswa",
             'nisn' => "1261323290",
             'gender' => "L",
             'tempat_lahir' => "Malang",

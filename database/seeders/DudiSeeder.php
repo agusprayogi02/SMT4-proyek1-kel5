@@ -18,6 +18,7 @@ class DudiSeeder extends Seeder
         Dudi::create([
             'user_id' => 5,
             'nib' => "74653542",
+            'nama' => "PT. Indo Ramah Tamah",
             'nama_pemilik' => "Dodi Hermanu",
             'alamat' => "Jl. Raya Budiman",
             'no_telp' => "08123456789",
