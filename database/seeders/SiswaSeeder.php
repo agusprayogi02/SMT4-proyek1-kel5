@@ -16,7 +16,7 @@ class SiswaSeeder extends Seeder
     public function run()
     {
         Siswa::create([
-            'user_id' => 4,
+            'user_id' => 2,
             'kelas_id' => 1,
             'smk_id' => "12345678",
             'nama' => "Siswa",

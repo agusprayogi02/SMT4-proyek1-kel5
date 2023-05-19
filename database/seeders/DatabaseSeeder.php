@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call([
             UserSeeder::class,
-            RoleAndPermissionSeeder::class,
             MenuGroupSeeder::class,
             MenuItemSeeder::class,
             CategorySeeder::class,
@@ -27,6 +26,7 @@ class DatabaseSeeder extends Seeder
             KeahlianSeeder::class,
             GuruSeeder::class,
             DudiSeeder::class,
+            RoleAndPermissionSeeder::class,
         ]);
     }
 }

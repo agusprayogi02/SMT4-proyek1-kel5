@@ -59,9 +59,10 @@ class GuruController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($nip)
     {
-        //
+        $guru = Guru::find($nip);
+        return view('users.guru.form')->with('guru', $guru);
     }
 
     /**

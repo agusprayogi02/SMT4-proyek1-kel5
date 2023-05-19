@@ -55,7 +55,7 @@
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>Bidang</th>
-                                            <th>deskripsi</th>
+                                            <th>Deskripsi</th>
                                             <th class="text-right">Action</th>
                                         </tr>
                                         @foreach ($keahlian as $key => $item)

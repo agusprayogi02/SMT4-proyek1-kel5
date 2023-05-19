@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Guru extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'nip';
 
     // relasi one to one with user
     public function user()

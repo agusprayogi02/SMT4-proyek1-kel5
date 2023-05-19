@@ -71,7 +71,7 @@
                                                 <td>{{ $item->user->name }}</td>
                                                 <td>{{ $item->gender === 'L' ? 'Laki-Laki' : 'Perempuan' }}</td>
                                                 <td>{{ $item->kelas->nama }}</td>
-                                                {{-- <td>{{ $item->smk-> }}</td> --}}
+                                                <td>{{ $item->smk }}</td>
                                                 @can('siswa.edit')
                                                     <td class="text-right">
                                                         <div class="d-flex justify-content-end">
