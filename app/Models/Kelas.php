@@ -10,8 +10,8 @@ class Kelas extends Model
     use HasFactory;
 
     // relasi one to many with siswa
-    public function siswa()
+    public function siswas()
     {
-        return $this->hasMany(Siswa::class, 'kelas_id', 'id');
+        return $this->hasMany(Siswa::class);
     }
 }

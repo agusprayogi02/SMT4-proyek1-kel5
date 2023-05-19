@@ -16,7 +16,7 @@ class SmkController extends Controller
     public function index()
     {
         $data = [
-            'smk' => Smk::paginate(10)
+            'smk' => Smk::with('user', 'siswas', 'gurus')->paginate(10)
         ];
         return view('users.smk.index', $data);
     }

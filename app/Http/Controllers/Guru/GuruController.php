@@ -16,7 +16,7 @@ class GuruController extends Controller
     public function index()
     {
         $data = [
-            'guru' => Guru::paginate(10)
+            'guru' => Guru::with('smk')->paginate(10)
         ];
         return view('users.guru.index', $data);
     }

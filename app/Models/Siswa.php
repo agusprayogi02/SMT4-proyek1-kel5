@@ -18,7 +18,7 @@ class Siswa extends Model
     // relasi one to many with smk
     public function smk()
     {
-        return $this->belongsTo(Smk::class, 'smk_id', 'id');
+        return $this->belongsTo(Smk::class, 'smk_id', 'npsn');
     }
 
     // relasi one to many with kelas

@@ -16,7 +16,7 @@ class KelasController extends Controller
     public function index()
     {
         $data = [
-            'kelas' => Kelas::paginate(10),
+            'kelas' => Kelas::with('siswas')->paginate(10),
         ];
         return view('kelas.index', $data);
     }

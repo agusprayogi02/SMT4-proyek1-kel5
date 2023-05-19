@@ -68,10 +68,10 @@
                                             <tr>
                                                 <td>{{ $siswa->firstItem() + $key }}</td>
                                                 <td>{{ $item->nisn }}</td>
-                                                <td>{{ $item->user->name }}</td>
+                                                <td>{{ $item->nama }}</td>
                                                 <td>{{ $item->gender === 'L' ? 'Laki-Laki' : 'Perempuan' }}</td>
                                                 <td>{{ $item->kelas->nama }}</td>
-                                                <td>{{ $item->smk }}</td>
+                                                <td>{{ $item->smk->nama }}</td>
                                                 @can('siswa.edit')
                                                     <td class="text-right">
                                                         <div class="d-flex justify-content-end">

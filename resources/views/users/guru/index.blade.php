@@ -58,6 +58,7 @@
                                             <th>Nama</th>
                                             <th>Alamat</th>
                                             <th>No. Telp</th>
+                                            <th>Mengajar</th>
                                             @can('guru.edit')
                                                 <th class="text-right">Action</th>
                                             @endcan
@@ -66,9 +67,10 @@
                                             <tr>
                                                 <td>{{ $guru->firstItem() + $key }}</td>
                                                 <td>{{ $item->nip }}</td>
-                                                <td>{{ $item->user->name }}</td>
+                                                <td>{{ $item->nama }}</td>
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>{{ $item->no_telp }}</td>
+                                                <td>{{ $item->smk->nama }}</td>
                                                 @can('guru.edit')
                                                     <td class="text-right">
                                                         <div class="d-flex justify-content-end">

@@ -16,14 +16,14 @@ class Smk extends Model
     }
 
     // relasi one to many with siswa
-    public function siswa()
+    public function siswas()
     {
-        return $this->hasMany(Siswa::class, 'smk_id', 'id');
+        return $this->hasMany(Siswa::class, 'smk_id', 'npsn');
     }
 
     // relasi one to many with guru
-    public function guru()
+    public function gurus()
     {
-        return $this->hasMany(Guru::class, 'smk_id', 'id');
+        return $this->hasMany(Guru::class, 'smk_id', 'npsn');
     }
 }

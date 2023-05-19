@@ -16,7 +16,7 @@ class SiswaController extends Controller
     public function index()
     {
         $data = [
-            'siswa' => Siswa::paginate(10)
+            'siswa' => Siswa::with('smk', 'kelas', 'user')->paginate(10)
         ];
         return view('users.siswa.index', $data);
     }
