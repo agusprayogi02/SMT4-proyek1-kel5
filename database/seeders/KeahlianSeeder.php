@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Keahlian;
+use DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,7 +16,7 @@ class KeahlianSeeder extends Seeder
      */
     public function run()
     {
-        Keahlian::create([
+        DB::table('keahlians')->insert([
             "nama" => "Ilustrasi",
             "bidang" => "Desain Komunikasi Visual",
             "deskripsi" => "Desain Ilustrasi dan Karakter Kartun"

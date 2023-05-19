@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Kelas;
+use DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,7 +16,7 @@ class KelasSeeder extends Seeder
      */
     public function run()
     {
-        Kelas::create([
+        DB::table('kelas')->insert([
             'nama' => 'XI RPL 1',
             'jurusan' => 'Rekayasa Perangkat Lunak'
         ], [
