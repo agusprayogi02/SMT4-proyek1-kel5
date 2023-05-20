@@ -13,7 +13,7 @@ class StoreGuruRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -28,6 +28,8 @@ class StoreGuruRequest extends FormRequest
             'nama' => 'required|string|max:60',
             'alamat' => 'required|string|max:200',
             'no_telp' => 'required|string|max:15',
+            'email' => 'required|email|unique:guru,email',
+            'password' => 'required',
         ];
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Guru;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Guru\StoreGuruRequest;
 use App\Models\Guru;
+use App\Models\User;
+use Hash;
 use Illuminate\Http\Request;
 
 class GuruController extends Controller
@@ -40,12 +42,13 @@ class GuruController extends Controller
      */
     public function store(StoreGuruRequest $request)
     {
-        Guru::create([
-            'nip' => $request['nip'],
-            'nama' => $request['nama'],
-            'alamat' => $request['alamat'],
-            'no_telp' => $request['no_telp']
-        ]);
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
+        $data['name'] = $data['nama'];
+        $user = User::create($data);
+        $data['user_id'] = $user->id;
+        Guru::create($data);
+        $user->assignRole('Guru');
         return redirect()->route('guru.index')->with('success', 'Data Guru Berhasil Ditambahkan');
     }
 

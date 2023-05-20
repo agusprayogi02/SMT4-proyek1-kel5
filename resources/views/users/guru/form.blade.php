@@ -3,27 +3,29 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{ isset($guru) ? 'Edit' : 'Buat' }} Guru</h1>
+            <h1>{{ isset($guru) ? 'Edit' : 'Tambah' }} Guru</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                 <div class="breadcrumb-item"><a href="#">Components</a></div>
-                <div class="breadcrumb-item">{{ isset($guru) ? 'Edit' : 'Buat' }} Guru</div>
+                <div class="breadcrumb-item">{{ isset($guru) ? 'Edit' : 'Tambah' }} Guru</div>
             </div>
         </div>
         <div class="section-body">
-            <h2 class="section-title">{{ isset($guru) ? 'Edit' : 'Buat' }} Guru</h2>
+            <h2 class="section-title">{{ isset($guru) ? 'Edit' : 'Tambah' }} Guru</h2>
             <div class="card">
                 <form action="{{ isset($guru) ? route('guru.update', $guru) : route('guru.store') }}" method="POST">
                     <div class="card-header">
-                        <h4>Validasi {{ isset($guru) ? 'Edit' : 'Buat' }} Data Guru</h4>
+                        <h4>Validasi {{ isset($guru) ? 'Edit' : 'Tambah' }} Data Guru</h4>
                     </div>
                     <div class="card-body">
                         @csrf
                         {!! isset($guru) ? method_field('PUT') : '' !!}
                         <x-form.input name="nip" :value="isset($guru) ? $guru->nip : ''" label="NIP" :readonly="isset($guru)" />
                         <x-form.input name="nama" :value="isset($guru) ? $guru->nama : ''" label="Nama" />
+                        <x-form.input name="email" :value="isset($user) ? $user->email : ''" label="Email" />
+                        <x-form.input type="password" name="password" :value="isset($user) ? $user->password : ''" label="Password" />
                         <x-form.text-area name="alamat" :value="isset($guru) ? $guru->alamat : ''" label="Alamat" placeholder="Masukkan Alamat" />
-                        <x-form.input name="no_telp" :value="isset($guru) ? $guru->no_telp : ''" label="No Telp" />
+                        <x-form.input type="number" name="no_telp" :value="isset($guru) ? $guru->no_telp : ''" label="No Telp" />
                     </div>
                     <div class="card-footer text-right">
                         <button class="btn btn-primary">Submit</button>
