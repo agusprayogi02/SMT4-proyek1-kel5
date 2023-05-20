@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Kelas extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'id',
+        'nama',
+        'jurusan',
+    ];
 
     // relasi one to many with siswa
     public function siswas()
