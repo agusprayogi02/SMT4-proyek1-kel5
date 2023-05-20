@@ -3,26 +3,28 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{ isset($laporan) ? 'Edit' : 'Buat' }} Laporan Harian</h1>
+            <h1>{{ isset($laporan) ? 'Edit' : 'Tambah' }} Laporan Harian</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                 <div class="breadcrumb-item"><a href="#">Components</a></div>
-                <div class="breadcrumb-item">{{ isset($laporan) ? 'Edit' : 'Buat' }} Laporan</div>
+                <div class="breadcrumb-item">{{ isset($laporan) ? 'Edit' : 'Tambah' }} Laporan</div>
             </div>
         </div>
         <div class="section-body">
-            <h2 class="section-title">{{ isset($laporan) ? 'Edit' : 'Buat' }} Laporan</h2>
+            <h2 class="section-title">{{ isset($laporan) ? 'Edit' : 'Tambah' }} Laporan</h2>
             <div class="card">
-                <form action="{{ isset($laporan) ? route('laporan.harian.update', $laporan) : route('laporan.harian.store') }}"
+                <form
+                    action="{{ isset($laporan) ? route('laporan.harian.update', $laporan) : route('laporan.harian.store') }}"
                     method="POST">
                     <div class="card-header">
-                        <h4>Validasi {{ isset($laporan) ? 'Edit' : 'Buat' }} Laporan Harian</h4>
+                        <h4>Validasi {{ isset($laporan) ? 'Edit' : 'Tambah' }} Laporan Harian</h4>
                     </div>
                     <div class="card-body">
                         @csrf
                         {!! isset($laporan) ? method_field('PUT') : '' !!}
                         <x-form.file-upload name="image" label="Gambar" :value="isset($laporan) ? $laporan->keterangan : ''" />
-                        <x-form.text-area name="keterangan" :value="isset($laporan) ? $laporan->keterangan : ''" label="Keterangan" />
+                        <x-form.text-area name="keterangan" :value="isset($laporan) ? $laporan->keterangan : ''" label="Keterangan"
+                            placeholder="Masukkan Keterangan" />
                     </div>
                     <div class="card-footer text-right">
                         <button class="btn btn-primary">Submit</button>
