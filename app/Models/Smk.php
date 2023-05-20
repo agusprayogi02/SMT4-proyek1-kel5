@@ -8,6 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Smk extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'npsn';
+    protected $keyType = 'string';
+    protected $fillable = [
+        'npsn',
+        'nama',
+        'alamat',
+        'no_telp',
+        'user_id',
+        'kepala_sekolah',
+        "verified_at"
+    ];
+    protected $guarded = [];
 
     // relasi one to one with user
     public function user()
