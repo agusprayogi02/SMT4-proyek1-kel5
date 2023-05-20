@@ -20,12 +20,9 @@
                     <div class="card-body">
                         @csrf
                         {!! isset($guru) ? method_field('PUT') : '' !!}
-                        <x-form.input name="nip" :value="isset($guru) ? $guru->nip : ''" label="NIP" @isset($guru)
-                            readonly @endisset />
-                        <x-form.input name="name" :value="isset($user) ? $user->name : ''" label="Nama" />
-                        {{--
-                    <x-form.select name="smk_id" :value="isset($guru) ? $guru->smk->id : ''" label="Asal SMK" /> --}}
-                        <x-form.text-area name="alamat" :value="isset($guru) ? $guru->alamat : ''" label="Alamat" />
+                        <x-form.input name="nip" :value="isset($guru) ? $guru->nip : ''" label="NIP" :readonly="isset($guru)" />
+                        <x-form.input name="nama" :value="isset($guru) ? $guru->nama : ''" label="Nama" />
+                        <x-form.text-area name="alamat" :value="isset($guru) ? $guru->alamat : ''" label="Alamat" placeholder="Masukkan Alamat" />
                         <x-form.input name="no_telp" :value="isset($guru) ? $guru->no_telp : ''" label="No Telp" />
                     </div>
                     <div class="card-footer text-right">

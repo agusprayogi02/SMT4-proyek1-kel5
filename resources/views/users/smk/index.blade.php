@@ -65,7 +65,7 @@
                                             <tr>
                                                 <td>{{ $smk->firstItem() + $key }}</td>
                                                 <td>{{ $item->npsn }}</td>
-                                                <td>{{ $item->user->name }}</td>
+                                                <td>{{ $item->nama }}</td>
                                                 <td>{{ $item->kepala_sekolah }}</td>
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>{{ $item->no_telp }}</td>

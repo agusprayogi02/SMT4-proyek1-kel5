@@ -9,6 +9,7 @@ class Guru extends Model
 {
     use HasFactory;
     protected $primaryKey = 'nip';
+    protected $guarded = ['nip'];
 
     // relasi one to one with user
     public function user()
