@@ -8,9 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Guru extends Model
 {
     use HasFactory;
-    protected $table = 'gurus';
     protected $primaryKey = 'nip';
-    protected $guarded = ['nip'];
+    protected $keyType = 'string';
+    protected $fillable = [
+        'nip',
+        'nama',
+        'alamat',
+        'no_telp',
+        'user_id',
+        'smk_id',
+    ];
 
     // relasi one to one with user
     public function user()

@@ -20,12 +20,13 @@
                     <div class="card-body">
                         @csrf
                         {!! isset($guru) ? method_field('PUT') : '' !!}
-                        <x-form.input name="nip" :value="isset($guru) ? $guru->nip : ''" label="NIP" :readonly="isset($guru)" />
-                        <x-form.input name="nama" :value="isset($guru) ? $guru->nama : ''" label="Nama" />
-                        <x-form.input name="email" :value="isset($user) ? $user->email : ''" label="Email" />
-                        <x-form.input type="password" name="password" :value="isset($user) ? $user->password : ''" label="Password" />
-                        <x-form.text-area name="alamat" :value="isset($guru) ? $guru->alamat : ''" label="Alamat" placeholder="Masukkan Alamat" />
-                        <x-form.input type="number" name="no_telp" :value="isset($guru) ? $guru->no_telp : ''" label="No Telp" />
+                        <x-form.input name="nip" :value="isset($guru) ? $guru->nip : old('nip')" label="NIP" :readonly="isset($guru)" />
+                        <x-form.input name="nama" :value="isset($guru) ? $guru->nama : old('nama')" label="Nama" />
+                        <x-form.input type="email" name="email" :value="isset($user) ? $user->email : old('email')" label="Email" />
+                        <x-form.input type="password" name="password" :value="isset($user) ? $user->password : old('password')" label="Password" />
+                        <x-form.select name="smk_id" :init-values="$smk" :value="isset($guru) ? $guru->smk_id : ''" label="Sekolah" />
+                        <x-form.text-area name="alamat" :value="isset($guru) ? $guru->alamat : old('alamat')" label="Alamat" placeholder="Masukkan Alamat" />
+                        <x-form.input type="number" name="no_telp" :value="isset($guru) ? $guru->no_telp : old('no_telp')" label="No Telp" />
                     </div>
                     <div class="card-footer text-right">
                         <button class="btn btn-primary">Submit</button>

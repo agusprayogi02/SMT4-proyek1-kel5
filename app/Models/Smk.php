@@ -19,7 +19,6 @@ class Smk extends Model
         'kepala_sekolah',
         "verified_at"
     ];
-    protected $guarded = [];
 
     // relasi one to one with user
     public function user()

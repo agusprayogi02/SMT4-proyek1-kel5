@@ -4,7 +4,7 @@ namespace App\Http\Requests\Guru;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreGuruRequest extends FormRequest
+class UpdateGuruRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,11 @@ class StoreGuruRequest extends FormRequest
     public function rules()
     {
         return [
-            'nip' => 'required|numeric|unique:gurus,nip',
-            'nama' => 'required|string',
+            'nip' => 'required',
+            'nama' => 'required',
             'alamat' => 'required|string',
-            'no_telp' => 'required|numeric',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-            'smk_id' => 'required',
+            'no_telp' => 'required|string',
+            'email' => 'required',
         ];
     }
 }
