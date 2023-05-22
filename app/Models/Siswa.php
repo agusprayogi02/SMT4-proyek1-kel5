@@ -38,4 +38,10 @@ class Siswa extends Model
     {
         return $this->belongsTo(Kelas::class, 'kelas_id', 'id');
     }
+
+    //relasi one to many with laporan
+    public function laporan()
+    {
+        return $this->hasMany(Laporan::class);
+    }
 }

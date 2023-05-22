@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('siswa_id', 10)->nullable();
             $table->foreign('siswa_id')->references('nisn')->on('siswas')->restrictOnDelete()->cascadeOnUpdate();
             $table->date('tanggal')->default(now());
+            $table->string('kegiatan');
             $table->string('image');
             $table->string('keterangan');
             $table->timestamps();

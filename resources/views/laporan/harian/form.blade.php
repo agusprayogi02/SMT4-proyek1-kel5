@@ -22,7 +22,9 @@
                     <div class="card-body">
                         @csrf
                         {!! isset($laporan) ? method_field('PUT') : '' !!}
-                        <x-form.file-upload name="image" label="Gambar" :value="isset($laporan) ? $laporan->keterangan : ''" />
+                        <x-form.input type="date" name="tanggal" :value="isset($laporan) ? $laporan->tanggal : now()->toDateString()" label="Tanggal" />
+                        <x-form.input name="kegiatan" label="Kegiatan" :value="isset($laporan) ? $laporan->kegiatan : ''" />
+                        <x-form.file-upload name="image" label="Gambar" :value="isset($laporan) ? $laporan->image : ''" />
                         <x-form.text-area name="keterangan" :value="isset($laporan) ? $laporan->keterangan : ''" label="Keterangan"
                             placeholder="Masukkan Keterangan" />
                     </div>
