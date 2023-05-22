@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('dudis', function (Blueprint $table) {
             $table->string('nib', 13)->primary();
-            $table->foreignId('user_id')->constrained('users')->restrictOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->restrictOnDelete()->cascadeOnUpdate();
             $table->string('nama', 80);
             $table->string('nama_pemilik', 50);
             $table->string('alamat', 200);

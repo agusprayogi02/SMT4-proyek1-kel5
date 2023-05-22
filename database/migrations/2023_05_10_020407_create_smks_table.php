@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('smks', function (Blueprint $table) {
             $table->string('npsn', 8)->primary();
-            $table->foreignId('user_id')->constrained('users')->restrictOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->restrictOnDelete()->cascadeOnUpdate();
             $table->string('nama', 80);
             $table->string('alamat', 200);
             $table->string('no_telp', 15);

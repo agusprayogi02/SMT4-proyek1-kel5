@@ -15,7 +15,7 @@ class Smk extends Model
         'nama',
         'alamat',
         'no_telp',
-        'user_id',
+        // 'user_id',
         'kepala_sekolah',
         "verified_at"
     ];

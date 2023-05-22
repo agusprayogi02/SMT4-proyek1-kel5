@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('siswas', function (Blueprint $table) {
             $table->string('nisn', 10)->primary();
-            $table->foreignId('user_id')->constrained('users')->restrictOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->restrictOnDelete()->cascadeOnUpdate();
             $table->foreignId('kelas_id')->constrained('kelas')->restrictOnDelete()->cascadeOnUpdate();
             $table->string('smk_id', 8)->nullable();
             $table->foreign('smk_id')->references('npsn')->on('smks')->restrictOnDelete()->cascadeOnUpdate();

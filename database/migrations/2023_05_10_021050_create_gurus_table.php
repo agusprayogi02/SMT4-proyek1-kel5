@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('gurus', function (Blueprint $table) {
             $table->string('nip', 18)->primary();
-            $table->foreignId('user_id')->constrained('users')->restrictOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->restrictOnDelete()->cascadeOnUpdate();
             $table->string('smk_id', 8);
             $table->foreign('smk_id')->references('npsn')->on('smks')->restrictOnDelete()->cascadeOnUpdate();
             $table->string('nama', 60);
