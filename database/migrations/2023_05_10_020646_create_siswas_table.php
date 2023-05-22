@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('kelas_id')->constrained('kelas')->restrictOnDelete()->cascadeOnUpdate();
             $table->string('smk_id', 8)->nullable();
             $table->foreign('smk_id')->references('npsn')->on('smks')->restrictOnDelete()->cascadeOnUpdate();
+            $table->string('nama', 60);
             $table->string('alamat', 200);
             $table->string('no_telp', 15);
             $table->enum('gender', ['L', 'P']);

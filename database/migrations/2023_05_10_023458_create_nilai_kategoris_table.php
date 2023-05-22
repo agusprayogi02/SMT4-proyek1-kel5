@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('nilai_kategoris', function (Blueprint $table) {
             $table->id();
             $table->foreignId('nilai_id')->constrained('nilais')->restrictOnDelete()->cascadeOnUpdate();
-            $table->string('kategori', 50);
+            $table->foreignId('kategori_id')->constrained('categories')->restrictOnDelete()->cascadeOnUpdate();
             $table->integer('nilai');
             $table->string('keterangan', 200);
             $table->timestamps();

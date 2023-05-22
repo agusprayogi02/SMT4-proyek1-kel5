@@ -3,11 +3,23 @@
 namespace App\Http\Controllers\Smk;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Smk\StoreSmkRequest;
+use App\Http\Requests\Smk\UpdateSmkRequest;
 use App\Models\Smk;
+use App\Models\User;
+use Hash;
 use Illuminate\Http\Request;
 
 class SmkController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:smk.index')->only('index');
+        $this->middleware('permission:smk.create')->only('create', 'store');
+        $this->middleware('permission:smk.edit')->only('edit', 'update');
+        $this->middleware('permission:smk.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +28,7 @@ class SmkController extends Controller
     public function index()
     {
         $data = [
-            'smk' => Smk::paginate(10)
+            'smk' => Smk::with('user', 'siswas', 'gurus')->paginate(10)
         ];
         return view('users.smk.index', $data);
     }
@@ -37,9 +49,20 @@ class SmkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSmkRequest $request)
     {
-        //
+        try {
+            $data = $request->validated();
+            $data['password'] = Hash::make($data['password']);
+            $data['name'] = $data['nama'];
+            $user = User::create($data);
+            $data['user_id'] = $user->id;
+            Smk::create($data);
+            $user->assignRole('SMK');
+            return redirect()->route('smk.index')->with('success', 'Data SMK berhasil ditambahkan');
+        } catch (\Throwable $th) {
+            return redirect()->route('smk.index')->with('error', 'Data SMK gagal ditambahkan');
+        }
     }
 
     /**
@@ -61,7 +84,14 @@ class SmkController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $data = [
+                'smk' => Smk::with('user')->where('npsn', $id)->firstOrFail()
+            ];
+            return view('users.smk.form', $data);
+        } catch (\Throwable $th) {
+            return redirect()->route('smk.index')->with('error', 'Data SMK gagal diedit');
+        }
     }
 
     /**
@@ -71,9 +101,22 @@ class SmkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSmkRequest $request, $id)
     {
-        //
+        try {
+            $data = $request->validated();
+            $smk = Smk::with('user')->where('npsn', $id)->firstOrFail();
+            $smk->update($data);
+            $data['name'] = $data['nama'];
+            $smk->user->update([
+                'name' => $data['nama'],
+                'email' => $data['email'],
+            ]);
+
+            return redirect()->route('smk.index')->with('success', 'Data SMK berhasil diedit');
+        } catch (\Throwable $th) {
+            return redirect()->route('smk.index')->with('error', 'Data SMK gagal diedit');
+        }
     }
 
     /**
@@ -84,6 +127,14 @@ class SmkController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $smk = Smk::with('user')->where('npsn', $id)->firstOrFail();
+            $smk->user->removeRole('SMK');
+            $smk->delete();
+            $smk->user->delete();
+            return redirect()->route('smk.index')->with('success', 'Data SMK berhasil dihapus');
+        } catch (\Throwable $th) {
+            return redirect()->route('smk.index')->with('error', 'Data SMK gagal dihapus');
+        }
     }
 }

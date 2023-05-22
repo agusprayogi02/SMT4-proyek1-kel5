@@ -25,8 +25,10 @@
                         <div class="card-header">
                             <h4>Menu Siswa</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('siswa.create') }}">Create
-                                    New Siswa</a>
+                                @can('siswa.create')
+                                    <a class="btn btn-icon icon-left btn-primary" href="{{ route('siswa.create') }}">Create
+                                        New Siswa</a>
+                                @endcan
                                 <a class="btn btn-info btn-primary active search"> <i class="fa fa-search"
                                         aria-hidden="true"></i> Search
                                     Siswa</a>
@@ -58,33 +60,37 @@
                                             <th>Gender</th>
                                             <th>Kelas</th>
                                             <th>Asal Sekolah</th>
-                                            <th class="text-right">Action</th>
+                                            @can('siswa.edit')
+                                                <th class="text-right">Action</th>
+                                            @endcan
                                         </tr>
                                         @foreach ($siswa as $key => $item)
                                             <tr>
                                                 <td>{{ $siswa->firstItem() + $key }}</td>
                                                 <td>{{ $item->nisn }}</td>
-                                                <td>{{ $item->user->name }}</td>
+                                                <td>{{ $item->nama }}</td>
                                                 <td>{{ $item->gender === 'L' ? 'Laki-Laki' : 'Perempuan' }}</td>
                                                 <td>{{ $item->kelas->nama }}</td>
-                                                {{-- <td>{{ $item->smk-> }}</td> --}}
-                                                <td class="text-right">
-                                                    <div class="d-flex justify-content-end">
-                                                        <a href="{{ route('siswa.edit', $item->id) }}"
-                                                            class="btn btn-sm btn-info btn-icon "><i
-                                                                class="fas fa-edit"></i>
-                                                            Edit</a>
-                                                        <form action="{{ route('siswa.destroy', $item->id) }}"
-                                                            method="POST" class="ml-2">
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <input type="hidden" name="_token"
-                                                                value="{{ csrf_token() }}">
-                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete"><i
-                                                                    class="fas fa-times"></i>
-                                                                Delete </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
+                                                <td>{{ $item->smk->nama }}</td>
+                                                @can('siswa.edit')
+                                                    <td class="text-right">
+                                                        <div class="d-flex justify-content-end">
+                                                            <a href="{{ route('siswa.edit', $item->nisn) }}"
+                                                                class="btn btn-sm btn-info btn-icon "><i
+                                                                    class="fas fa-edit"></i>
+                                                                Edit</a>
+                                                            <form action="{{ route('siswa.destroy', $item->nisn) }}"
+                                                                method="POST" class="ml-2">
+                                                                <input type="hidden" name="_method" value="DELETE">
+                                                                <input type="hidden" name="_token"
+                                                                    value="{{ csrf_token() }}">
+                                                                <button class="btn btn-sm btn-danger btn-icon confirm-delete"><i
+                                                                        class="fas fa-times"></i>
+                                                                    Delete </button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                @endcan
                                             </tr>
                                         @endforeach
                                     </tbody>

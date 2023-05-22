@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Siswa extends Model
 {
     use HasFactory;
-    protected $table = "siswas";
-    protected $primaryKey = 'id';
     protected $fillable = [
         'nisn',
         'user_id',
@@ -22,4 +20,22 @@ class Siswa extends Model
         'tanggal_lahir',
         'agama',
     ];
+
+    // relasi one to one with user
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    // relasi one to many with smk
+    public function smk()
+    {
+        return $this->belongsTo(Smk::class, 'smk_id', 'npsn');
+    }
+
+    // relasi one to many with kelas
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id', 'id');
+    }
 }
