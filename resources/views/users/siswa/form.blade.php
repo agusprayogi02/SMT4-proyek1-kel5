@@ -10,31 +10,33 @@
                 <div class="breadcrumb-item">{{ isset($siswa) ? 'Edit' : 'Tambah' }} Siswa</div>
             </div>
         </div>
-        <div class="section-body">
-            <h2 class="section-title">{{ isset($siswa) ? 'Edit' : 'Tambah' }} Siswa</h2>
-            <div class="card">
-                <form action="{{ isset($siswa) ? route('siswa.update', $siswa) : route('siswa.store') }}" method="POST">
-                    <div class="card-header">
-                        <h4>Validasi {{ isset($siswa) ? 'Edit' : 'Tambah' }} Data Siswa</h4>
-                    </div>
-                    <div class="card-body">
-                        @csrf
-                        {!! isset($siswa) ? method_field('PUT') : '' !!}
-                        <x-form.input name="nisn" :value="isset($siswa) ? $siswa->nisn : ''" label="NISN" :readonly="isset($siswa)" />
-                        {{--
+    </div>
+    <div class="section-body">
+        <h2 class="section-title">{{ isset($siswa) ? 'Edit' : 'Buat' }} Siswa</h2>
+        <div class="card">
+            <form action="{{ isset($siswa) ? route('siswa.update', $siswa) : route('siswa.store') }}" method="POST">
+                <div class="card-header">
+                    <h4>Validasi {{ isset($siswa) ? 'Edit' : 'Buat' }} Data Siswa</h4>
+                </div>
+                <div class="card-body">
+                    @csrf
+                    {!! isset($siswa) ? method_field('PUT') : '' !!}
+                    {{--
                     <x-form.select name="kelas_id" :value="isset($siswa) ? $siswa->kelas->id : ''" label="Kelas" />
                     --}}
                         {{--
                     <x-form.select name="smk_id" :value="isset($siswa) ? $siswa->smk->id : ''" label="Asal SMK" /> --}}
-                        <x-form.input name="nama" :value="isset($siswa) ? $siswa->nama : ''" label="Nama" />
-                        <label for="g">Jenis Kelamin</label>
-                        <div class="row" id="g">
-                            <div class="col-md-6">
-                                <x-form.radio id="gender1" name="gender" value="L" label="Laki-Laki" />
-                            </div>
-                            <div class="col-md-6">
-                                <x-form.radio id="gender2" name="gender" value="P" label="Perempuan" />
-                            </div>
+                    {{-- <x-form.input name="nisn" :value="isset($siswa) ? $siswa->nisn : ''" label="NISN" @isset($siswa) readonly @endisset /> --}}
+                    <x-form.input name="nisn" :value="isset($siswa) ? $siswa->nisn : ''"
+                        label="NISN" />
+                    <x-form.input name="name" :value="isset($user) ? $user->name : ''" label="Nama" />
+                    <label for="g">Jenis Kelamin</label>
+                    <div class="row" id="g">
+                        <div class="col-md-6">
+                            <x-form.radio id="gender1" name="gender" value="L" label="Laki-Laki" />
+                        </div>
+                        <div class="col-md-6">
+                            <x-form.radio id="gender2" name="gender" value="P" label="Perempuan" />
                         </div>
                         <x-form.select name="agama" :init-values="$agama" :value="isset($siswa) ? $siswa->agama : ''" label="Agama" />
                         <x-form.input name="tempat_lahir" :value="isset($siswa) ? $siswa->tempat_lahir : ''" label="Tempat Lahir" />

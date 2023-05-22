@@ -42,7 +42,20 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'user_id',
+            'kelas_id',
+            'smk_id',
+            'alamat',
+            'no_telp',
+            'gender',
+            'tempat_lahir',
+            'tanggal_lahir',
+            'agama',
+        ]);
+        Siswa::create($request->except(['_token']));
+        return redirect('/siswa')
+            ->with('success', 'Data Siswa Berhasil Ditambahkan');
     }
 
     /**

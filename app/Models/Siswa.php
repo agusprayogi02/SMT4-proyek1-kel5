@@ -8,6 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Siswa extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nisn',
+        'user_id',
+        'kelas_id',
+        'smk_id',
+        'alamat',
+        'no_telp',
+        'gender',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'agama',
+    ];
 
     // relasi one to one with user
     public function user()
