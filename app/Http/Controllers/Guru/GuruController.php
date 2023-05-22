@@ -59,13 +59,16 @@ class GuruController extends Controller
     {
         try {
             $data = $request->validated();
-            $guru = Guru::with('user')->create($data);
-            $guru->user = new User();
-            $guru->user->name = $data['nama'];
-            $guru->user->email = $data['email'];
-            $guru->user->password = Hash::make($data['password']);
-            $guru->user->save();
-            $guru->user->assignRole('Guru');
+            $guru = new Guru($data);
+
+            $user = User::create([
+                'name' => $guru->nama,
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+            $guru->user()->associate($user);
+            $guru->save();
+            $user->assignRole('Guru');
             return redirect()->route('guru.index')->with('success', 'Berhasil menambahkan data Guru');
         } catch (\Throwable $th) {
             $guru = Guru::where('nip', $request->nip)->first();
