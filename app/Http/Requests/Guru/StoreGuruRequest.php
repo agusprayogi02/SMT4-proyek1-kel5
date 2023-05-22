@@ -31,6 +31,7 @@ class StoreGuruRequest extends FormRequest
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'smk_id' => 'required',
+            'assignRole' => 'required',
         ];
     }
 }

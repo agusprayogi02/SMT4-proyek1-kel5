@@ -75,7 +75,8 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Tanggal</th>
-                                            <th>Image</th>
+                                            <th>Kegiatan</th>
+                                            <th>Gambar</th>
                                             <th>Keterangan</th>
                                             @can('laporan-harian.edit')
                                                 <th class="text-right">Action</th>
@@ -85,6 +86,7 @@
                                             <tr>
                                                 <td>{{ $laporan->firstItem() + $key }}</td>
                                                 <td>{{ $item->tanggal }}</td>
+                                                <td>{{ $item->kegiatan }}</td>
                                                 <td><img src="{{ $item->image }}" alt="{{ $item->image }}"
                                                         class="img-thumbnail rounded"></td>
                                                 <td>{{ $item->keterangan }}</td>
