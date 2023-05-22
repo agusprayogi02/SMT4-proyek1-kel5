@@ -20,13 +20,14 @@
                 <div class="card-body">
                     @csrf
                     {!! isset($siswa) ? method_field('PUT') : '' !!}
-                    <x-form.input name="nisn" :value="isset($siswa) ? $siswa->nisn : ''" label="NISN" @isset($siswa)
-                        readonly @endisset />
                     {{--
                     <x-form.select name="kelas_id" :value="isset($siswa) ? $siswa->kelas->id : ''" label="Kelas" />
                     --}}
                     {{--
                     <x-form.select name="smk_id" :value="isset($siswa) ? $siswa->smk->id : ''" label="Asal SMK" /> --}}
+                    {{-- <x-form.input name="nisn" :value="isset($siswa) ? $siswa->nisn : ''" label="NISN" @isset($siswa) readonly @endisset /> --}}
+                    <x-form.input name="nisn" :value="isset($siswa) ? $siswa->nisn : ''"
+                        label="NISN" />
                     <x-form.input name="name" :value="isset($user) ? $user->name : ''" label="Nama" />
                     <label for="g">Jenis Kelamin</label>
                     <div class="row" id="g">

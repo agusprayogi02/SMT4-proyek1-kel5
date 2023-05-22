@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Keahlian;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class KeahlianController extends Controller
 {
@@ -38,7 +39,14 @@ class KeahlianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'bidang' => 'required',
+            'deskripsi' => 'required',
+        ]);
+        Keahlian::create($request->except(['_token']));
+        return redirect('/keahlian')
+            ->with('success', 'Data Keahlian Berhasil Ditambahkan');
     }
 
     /**
@@ -60,7 +68,8 @@ class KeahlianController extends Controller
      */
     public function edit($id)
     {
-        //
+        $keahlian = Keahlian::find($id);
+        return view('keahlian.form', ['urlform' => url("/keahlian/" . $id), 'keahlian' => $keahlian]);
     }
 
     /**
@@ -72,7 +81,18 @@ class KeahlianController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'bidang' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        $requestData = $request->except(['_token', '_method']);
+        $requestData['id'] = $id;
+
+        $data = Keahlian::where('id', '=', $id)->update($requestData);
+        return redirect('/keahlian')
+            ->with('success', 'Data Keahlian Berhasil Diedit');
     }
 
     /**
@@ -83,6 +103,10 @@ class KeahlianController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $requestData['id'] = $id;
+
+        Keahlian::where('id', '=', $id)->delete();
+        return redirect('/keahlian')
+            ->with('success', 'Data Keahlian Berhasil Dihapus');
     }
 }
