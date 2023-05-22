@@ -56,6 +56,7 @@
                                             <th>No</th>
                                             <th>NIP</th>
                                             <th>Nama</th>
+                                            <th>Sekolah</th>
                                             <th>Alamat</th>
                                             <th>No. Telp</th>
                                             @can('guru.edit')
@@ -67,6 +68,7 @@
                                                 <td>{{ $guru->firstItem() + $key }}</td>
                                                 <td>{{ $item->nip }}</td>
                                                 <td>{{ $item->nama }}</td>
+                                                <td>{{ $item->smk->nama }}</td>
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>{{ $item->no_telp }}</td>
                                                 @can('guru.edit')
