@@ -21,7 +21,7 @@ class SmkSeeder extends Seeder
             'nama' => "SMK Negeri 1 Malang",
             'alamat' => "Jl. Teluk Pacitan",
             'no_telp' => "0341479164",
-            'kepala_sekolah' => "Moh. Guntur",
+            'kepala_sekolah' => "Diah Putri Nofianti",
         ]);
     }
 }
