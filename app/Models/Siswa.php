@@ -13,12 +13,13 @@ class Siswa extends Model
         'user_id',
         'kelas_id',
         'smk_id',
+        'nama',
         'alamat',
+        'agama',
         'no_telp',
         'gender',
         'tempat_lahir',
         'tanggal_lahir',
-        'agama',
     ];
 
     // relasi one to one with user
