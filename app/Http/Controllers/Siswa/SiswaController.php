@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\Smk;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -30,6 +32,8 @@ class SiswaController extends Controller
     {
         $data = [
             'agama' => ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu'],
+            'smk' => Smk::all(),
+            'kelas' => Kelas::all(),
         ];
         return view('users.siswa.form', $data);
     }
@@ -43,9 +47,11 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'nisn',
             'user_id',
             'kelas_id',
             'smk_id',
+            'nama',
             'alamat',
             'no_telp',
             'gender',
