@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\laporan\harian\StoreLaporanRequest;
+use App\Http\Requests\laporan\harian\UpdateLaporanRequest;
 use App\Models\LaporanHarian;
 use Illuminate\Http\Request;
+use Storage;
 
 class LaporanHarianController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:laporan-harian.index')->only('index');
+        $this->middleware('permission:laporan-harian.create')->only('create', 'store');
+        $this->middleware('permission:laporan-harian.edit')->only('edit', 'update');
+        $this->middleware('permission:laporan-harian.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +26,7 @@ class LaporanHarianController extends Controller
     public function index()
     {
         $data = [
-            'laporan' => LaporanHarian::paginate(10)
+            'laporan' => LaporanHarian::with('siswa')->paginate(10)
         ];
         return view('laporan.harian.index', $data);
     }
@@ -36,9 +47,22 @@ class LaporanHarianController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreLaporanRequest $request)
     {
-        //
+        try {
+            $request->validated();
+            if ($request->hasFile('photo')) {
+                $image_name = $request->file('photo')->store('images', 'public');
+                $request->merge([
+                    'image' => $image_name,
+                ]);
+            }
+
+            LaporanHarian::create($request->all());
+            return redirect()->route('laporan.harian.index')->with('success', 'Laporan harian berhasil ditambahkan');
+        } catch (\Throwable $th) {
+            return redirect()->route('laporan.harian.index')->with('error', 'Laporan harian gagal ditambahkan');
+        }
     }
 
     /**
@@ -72,9 +96,27 @@ class LaporanHarianController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateLaporanRequest $request, $id)
     {
-        //
+        try {
+            $request->validated();
+            $laporan = LaporanHarian::where('id', $id)->first();
+
+            if ($request->hasFile('photo')) {
+                if ($laporan->image && file_exists(storage_path('app/public/' . $laporan->image))) {
+                    Storage::delete('public/' . $laporan->image);
+                }
+                $image_name = $request->file('photo')->store('images', 'public');
+                $request->merge([
+                    'image' => $image_name,
+                ]);
+            }
+
+            LaporanHarian::findOrFail($id)->update($request->all());
+            return redirect()->route('laporan.harian.index')->with('success', 'Laporan harian berhasil diedit');
+        } catch (\Throwable $th) {
+            return redirect()->route('laporan.harian.index')->with('error', 'Laporan harian gagal diedit');
+        }
     }
 
     /**
@@ -85,6 +127,11 @@ class LaporanHarianController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            LaporanHarian::findOrFail($id)->delete();
+            return redirect()->route('laporan.harian.index')->with('success', 'Laporan harian berhasil dihapus');
+        } catch (\Throwable $th) {
+            return redirect()->route('laporan.harian.index')->with('error', 'Laporan harian gagal dihapus');
+        }
     }
 }

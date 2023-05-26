@@ -9,7 +9,7 @@ class LaporanHarian extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'siswa_id',
+        // 'siswa_id',
         'tanggal',
         'kegiatan',
         'image',

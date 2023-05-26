@@ -13,7 +13,7 @@ class UpdateLaporanRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdateLaporanRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'tanggal' => 'required|date',
+            'kegiatan' => 'required|string',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'keterangan' => 'required|string',
         ];
     }
 }
