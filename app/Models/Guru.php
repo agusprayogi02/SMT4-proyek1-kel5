@@ -30,4 +30,10 @@ class Guru extends Model
     {
         return $this->belongsTo(Smk::class, 'smk_id', 'npsn');
     }
+
+    // relasi one to many with daftar magang
+    public function daftarMagang()
+    {
+        return $this->hasMany(DaftarMagang::class, 'guru_id', 'nip');
+    }
 }

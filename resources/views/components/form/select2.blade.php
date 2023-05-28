@@ -1,6 +1,6 @@
 <div class="form-group">
     <label for="{{ $name }}">{{ $label }}</label>
-    <select class="custom-select" id="{{ $name }}" name="{{ $name }}" {{ $attributes }}>
+    <select class="form-control select2" id="{{ $name }}" name="{{ $name }}" {{ $attributes }}>
         <option value="">Pilih {{ $label }}</option>
         {{ $slot }}
     </select>

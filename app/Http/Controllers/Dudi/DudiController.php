@@ -8,7 +8,6 @@ use App\Http\Requests\Dudi\UpdateDudiRequest;
 use App\Models\Dudi;
 use App\Models\User;
 use Hash;
-use Illuminate\Http\Request;
 
 class DudiController extends Controller
 {

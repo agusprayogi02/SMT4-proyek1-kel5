@@ -15,4 +15,9 @@ class Keahlian extends Model
         'bidang',
         'deskripsi',
     ];
+
+    public function daftarMagang()
+    {
+        return $this->hasMany(DaftarMagang::class);
+    }
 }
