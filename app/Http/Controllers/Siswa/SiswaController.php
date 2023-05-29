@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use App\Models\Smk;
+use App\Models\User;
+use Hash;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -47,19 +49,26 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nisn',
-            'user_id',
-            'kelas_id',
-            'smk_id',
-            'nama',
-            'alamat',
-            'no_telp',
-            'gender',
-            'tempat_lahir',
-            'tanggal_lahir',
-            'agama',
+            'nisn' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'kelas_id' => 'required',
+            'smk_id' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'no_telp' => 'required',
+            'gender' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'agama' => 'required',
         ]);
-        Siswa::create($request->except(['_token']));
+        $siswa = Siswa::with('user')->create($request->except(['_token']));
+        $siswa->user = new User();
+        $siswa->user->name = $request->nama;
+        $siswa->user->email = $request->email;
+        $siswa->user->password = Hash::make($request->password);
+        $siswa->user->save();
+        $siswa->user->assignRole('Siswa');
         return redirect('/siswa')
             ->with('success', 'Data Siswa Berhasil Ditambahkan');
     }
@@ -85,7 +94,9 @@ class SiswaController extends Controller
     {
         $data = [
             'agama' => ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu'],
-            'siswa' => Siswa::find($id)
+            'smk' => Smk::all(),
+            'kelas' => Kelas::all(),
+            'siswa' => Siswa::where('nisn', $id)->first()
         ];
         return view('users.siswa.form', $data);
     }
