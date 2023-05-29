@@ -55,13 +55,15 @@ class SmkController extends Controller
             $data = $request->validated();
             // $user = User::create($data);
             // $data['user_id'] = $user->id;
-            $smk = Smk::with('user')->create($data);
-            $smk->user = new User();
-            $smk->user->name = $smk->nama;
-            $smk->user->email = $data['email'];
-            $smk->user->password = Hash::make($data['password']);
-            $smk->user->save();
-            $smk->user->assignRole('SMK');
+            $smk = new Smk($data);
+            $user = User::create([
+                'name' => $smk->nama,
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+            $smk->user()->associate($user);
+            $smk->save();
+            $user->assignRole('SMK');
             return redirect()->route('smk.index')->with('success', 'Data SMK berhasil ditambahkan');
         } catch (\Throwable $th) {
             $smk = Smk::where('npsn', $request->npsn)->first();

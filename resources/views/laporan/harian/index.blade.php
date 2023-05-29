@@ -87,8 +87,14 @@
                                                 <td>{{ $laporan->firstItem() + $key }}</td>
                                                 <td>{{ $item->tanggal }}</td>
                                                 <td>{{ $item->kegiatan }}</td>
-                                                <td><img src="{{ $item->image }}" alt="{{ $item->image }}"
-                                                        class="img-thumbnail rounded"></td>
+                                                <td>
+                                                    @if ($item->image)
+                                                        <img width="100px" src="{{ asset('storage/' . $item->image) }}"
+                                                            class="img-thumbnail rounded" alt="Gambar">
+                                                    @else
+                                                        Kosong
+                                                    @endif
+                                                </td>
                                                 <td>{{ $item->keterangan }}</td>
                                                 @can('laporan-harian.edit')
                                                     <td class="text-right">

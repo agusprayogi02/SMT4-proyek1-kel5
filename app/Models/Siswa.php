@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Siswa extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'nisn';
+    protected $keyType = 'string';
+
     protected $fillable = [
         'nisn',
         'kelas_id',
@@ -43,5 +46,11 @@ class Siswa extends Model
     public function laporan()
     {
         return $this->hasMany(Laporan::class);
+    }
+
+    //relasi one to many with daftar magang
+    public function daftarMagang()
+    {
+        return $this->hasMany(DaftarMagang::class, 'siswa_id', 'nisn');
     }
 }

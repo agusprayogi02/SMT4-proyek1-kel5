@@ -15,7 +15,7 @@
             <div class="card">
                 <form
                     action="{{ isset($laporan) ? route('laporan.harian.update', $laporan) : route('laporan.harian.store') }}"
-                    method="POST">
+                    method="POST" enctype="multipart/form-data">
                     <div class="card-header">
                         <h4>Validasi {{ isset($laporan) ? 'Edit' : 'Tambah' }} Laporan Harian</h4>
                     </div>
@@ -23,9 +23,9 @@
                         @csrf
                         {!! isset($laporan) ? method_field('PUT') : '' !!}
                         <x-form.input type="date" name="tanggal" :value="isset($laporan) ? $laporan->tanggal : now()->toDateString()" label="Tanggal" />
-                        <x-form.input name="kegiatan" label="Kegiatan" :value="isset($laporan) ? $laporan->kegiatan : ''" />
-                        <x-form.file-upload name="image" label="Gambar" :value="isset($laporan) ? $laporan->image : ''" />
-                        <x-form.text-area name="keterangan" :value="isset($laporan) ? $laporan->keterangan : ''" label="Keterangan"
+                        <x-form.input name="kegiatan" label="Kegiatan" :value="isset($laporan) ? $laporan->kegiatan : old('kegiatan')" />
+                        <x-form.file-upload type="file" name="photo" label="Gambar" :value="isset($laporan) ? $laporan->image : old('image')" />
+                        <x-form.text-area name="keterangan" :value="isset($laporan) ? $laporan->keterangan : old('keterangan')" label="Keterangan"
                             placeholder="Masukkan Keterangan" />
                     </div>
                     <div class="card-footer text-right">

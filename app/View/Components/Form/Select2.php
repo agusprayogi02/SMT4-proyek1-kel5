@@ -28,6 +28,6 @@ class SelectCustom extends Component
      */
     public function render()
     {
-        return view('components.form.select-custom');
+        return view('components.form.select2');
     }
 }

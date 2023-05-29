@@ -8,7 +8,6 @@ use App\Http\Requests\Dudi\UpdateDudiRequest;
 use App\Models\Dudi;
 use App\Models\User;
 use Hash;
-use Illuminate\Http\Request;
 
 class DudiController extends Controller
 {
@@ -53,12 +52,13 @@ class DudiController extends Controller
     {
         try {
             $data = $request->validated();
+            $dudi = new Dudi($data);
             $data['password'] = Hash::make($data['password']);
             $data['name'] = $data['nama'];
             $user = User::create($data);
-            $data['user_id'] = $user->id;
-            $dudi = Dudi::create($data);
-            $dudi->user->assignRole('DUDI');
+            $dudi->user()->associate($user);
+            $dudi->save();
+            $user->assignRole('DUDI');
             return redirect()->route('dudi.index')->with('success', 'Berhasil menambahkan data Dudi');
         } catch (\Throwable $th) {
             return redirect()->route('dudi.index')->with('error', 'Gagal menambahkan data Dudi');

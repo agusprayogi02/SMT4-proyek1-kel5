@@ -18,7 +18,6 @@
                         <h4>Validasi {{ isset($guru) ? 'Edit' : 'Tambah' }} Data Guru</h4>
                     </div>
                     <div class="card-body">
-
                         @csrf
                         {!! isset($guru) ? method_field('PUT') : '' !!}
                         <x-form.input name="nip" :value="isset($guru) ? $guru->nip : old('nip')" label="NIP" :readonly="isset($guru)" />
@@ -27,7 +26,13 @@
                         @if (!isset($guru))
                             <x-form.input type="password" name="password" :value="old('password')" label="Password" />
                         @endif
-                        <x-form.select name="smk_id" :init-values="$smk" :value="isset($guru) ? $guru->smk_id : ''" label="Sekolah" />
+                        <x-form.select-custom name="smk_id" :value="isset($guru) ? $guru->smk_id : ''" label="Sekolah">
+                            @foreach ($smk as $item)
+                                <option value="{{ $item->npsn }}"
+                                    {{ isset($guru) ? ($guru->smk_id === $item->npsn ? 'selected' : '') : '' }}>
+                                    {{ $item->nama }}</option>
+                            @endforeach
+                        </x-form.select-custom>
                         <x-form.text-area name="alamat" :value="isset($guru) ? $guru->alamat : old('alamat')" label="Alamat" placeholder="Masukkan Alamat" />
                         <x-form.input type="number" name="no_telp" :value="isset($guru) ? $guru->no_telp : old('no_telp')" label="No Telp" />
                     </div>

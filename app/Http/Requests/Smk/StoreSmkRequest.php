@@ -31,7 +31,6 @@ class StoreSmkRequest extends FormRequest
             'password' => 'required',
             'no_telp' => 'required|numeric',
             'kepala_sekolah' => 'required|string',
-            'assignRole' => 'required',
         ];
     }
 }

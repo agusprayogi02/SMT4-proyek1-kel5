@@ -43,8 +43,10 @@ class GuruController extends Controller
      */
     public function create()
     {
-        $smk = Smk::pluck('nama', 'npsn')->toArray();
-        return view('users.guru.form', compact('smk'));
+        $data = [
+            'smk' => Smk::all()
+        ];
+        return view('users.guru.form', $data);
     }
 
     /**
@@ -55,17 +57,28 @@ class GuruController extends Controller
      */
     public function store(StoreGuruRequest $request)
     {
-        dd($request->validated());
         try {
             $data = $request->validated();
-            $data['password'] = Hash::make($data['password']);
-            $data['name'] = $data['nama'];
-            $user = User::create($data);
-            $data['user_id'] = $user->id;
-            Guru::create($data);
+            $guru = new Guru($data);
+
+            $user = User::create([
+                'name' => $guru->nama,
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+            $guru->user()->associate($user);
+            $guru->save();
             $user->assignRole('Guru');
             return redirect()->route('guru.index')->with('success', 'Berhasil menambahkan data Guru');
         } catch (\Throwable $th) {
+            $guru = Guru::where('nip', $request->nip)->first();
+            if ($guru) {
+                $guru->delete();
+                $user = User::where('email', $request->nip)->first();
+                if ($user) {
+                    $user->delete();
+                }
+            }
             return redirect()->route('guru.index')->with('error', 'Gagal menambahkan data Guru');
         }
     }
@@ -89,9 +102,11 @@ class GuruController extends Controller
      */
     public function edit($nip)
     {
-        $smk = Smk::pluck('nama', 'npsn')->toArray();
-        $guru = Guru::find($nip);
-        return view('users.guru.form', compact('smk'))->with('guru', $guru);
+        $data = [
+            'guru' => Guru::find($nip),
+            'smk' => Smk::all(),
+        ];
+        return view('users.guru.form', $data);
     }
 
     /**

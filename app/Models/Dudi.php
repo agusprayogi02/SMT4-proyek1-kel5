@@ -25,4 +25,10 @@ class Dudi extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    // relasi one to many with daftar magang
+    public function daftarMagang()
+    {
+        return $this->hasMany(DaftarMagang::class, 'dudi_id', 'nib');
+    }
 }
