@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Siswa\UpdateSiswaRequest;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use App\Models\Smk;
@@ -62,12 +63,14 @@ class SiswaController extends Controller
             'tanggal_lahir' => 'required',
             'agama' => 'required',
         ]);
-        $siswa = Siswa::with('user')->create($request->except(['_token']));
-        $siswa->user = new User();
-        $siswa->user->name = $request->nama;
-        $siswa->user->email = $request->email;
-        $siswa->user->password = Hash::make($request->password);
-        $siswa->user->save();
+        $siswa = new Siswa($request->except(['_token']));
+        $user = new User();
+        $user->name = $request->nama;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        $siswa->user()->associate($user);
+        $siswa->save();
         $siswa->user->assignRole('Siswa');
         return redirect('/siswa')
             ->with('success', 'Data Siswa Berhasil Ditambahkan');
@@ -90,13 +93,13 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($nisn)
     {
         $data = [
             'agama' => ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu'],
             'smk' => Smk::all(),
             'kelas' => Kelas::all(),
-            'siswa' => Siswa::where('nisn', $id)->first()
+            'siswa' => Siswa::with('smk', 'kelas', 'user')->find($nisn),
         ];
         return view('users.siswa.form', $data);
     }
@@ -108,9 +111,21 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSiswaRequest $request, $id)
     {
-        //
+        try {
+            $data = $request->validated();
+            $guru = Siswa::with('user')->where('nisn', $id)->firstOrFail();
+            $guru->update($data);
+            $data['name'] = $data['nama'];
+            $guru->user->update([
+                'name' => $data['nama'],
+                'email' => $data['email'],
+            ]);
+            return redirect()->route('siswa.index')->with('success', 'Data Siswa Berhasil Diedit');
+        } catch (\Throwable $th) {
+            return redirect()->route('siswa.index')->with('error', 'Data Siswa gagal diedit');
+        }
     }
 
     /**

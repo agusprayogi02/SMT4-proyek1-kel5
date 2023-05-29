@@ -31,7 +31,7 @@
                             </div>
                         @endif
                         <x-form.input name="nisn" :value="isset($siswa) ? $siswa->nisn : old('nisn')" label="NISN" :readonly="isset($siswa)" />
-                        <x-form.input name="nama" :value="isset($user) ? $user->nama : old('nama')" label="Nama" />
+                        <x-form.input name="nama" :value="isset($siswa) ? $siswa->nama : old('nama')" label="Nama" />
                         <x-form.input type="email" name="email" :value="isset($siswa) ? $siswa->user->email : old('email')" label="Email" />
                         @if (!isset($siswa))
                             <x-form.input type="password" name="password" :value="old('password')" label="Password" />
@@ -53,10 +53,12 @@
                         <label for="g">Jenis Kelamin</label>
                         <div class="row" id="g">
                             <div class="col-md-6">
-                                <x-form.radio id="gender1" name="gender" value="L" label="Laki-Laki" />
+                                <x-form.radio id="gender1" name="gender" value="L" label="Laki-Laki"
+                                    :checked="isset($siswa) && $siswa->gender == 'L'" />
                             </div>
                             <div class="col-md-6">
-                                <x-form.radio id="gender2" name="gender" value="P" label="Perempuan" />
+                                <x-form.radio id="gender2" name="gender" value="P" label="Perempuan"
+                                    :checked="isset($siswa) && $siswa->gender == 'P'" />
                             </div>
                         </div>
                         <x-form.select name="agama" :init-values="$agama" :value="isset($siswa) ? $siswa->agama : ''" label="Agama" />
