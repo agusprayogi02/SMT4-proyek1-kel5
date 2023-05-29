@@ -36,20 +36,20 @@
                         @if (!isset($siswa))
                             <x-form.input type="password" name="password" :value="old('password')" label="Password" />
                         @endif
-                        <x-form.select-custom name="kelas_id" :value="isset($siswa) ? $siswa->kelas_id : old('kelas_id')" label="Kelas">
+                        <x-form.select2 name="kelas_id" :value="isset($siswa) ? $siswa->kelas_id : old('kelas_id')" label="Kelas">
                             @foreach ($kelas as $item)
                                 <option value="{{ $item->id }}"
                                     {{ isset($siswa) ? ($siswa->kelas_id === $item->id ? 'selected' : '') : '' }}>
                                     {{ $item->nama }}</option>
                             @endforeach
-                        </x-form.select-custom>
-                        <x-form.select-custom name="smk_id" :value="isset($siswa) ? $siswa->smk_id : ''" label="SMK">
+                        </x-form.select2>
+                        <x-form.select2 name="smk_id" :value="isset($siswa) ? $siswa->smk_id : ''" label="SMK">
                             @foreach ($smk as $item)
                                 <option value="{{ $item->npsn }}"
                                     {{ isset($siswa) ? ($siswa->smk_id === $item->npsn ? 'selected' : '') : '' }}>
                                     {{ $item->nama }}</option>
                             @endforeach
-                        </x-form.select-custom>
+                        </x-form.select2>
                         <label for="g">Jenis Kelamin</label>
                         <div class="row" id="g">
                             <div class="col-md-6">
@@ -76,6 +76,12 @@
 @endsection
 
 @push('customScript')
+    <script src="{{ asset('assets/js/select2.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
     <script>
         $(document).ready(function() {
             //ganti label berdasarkan nama file
@@ -89,4 +95,5 @@
 @endpush
 
 @push('customStyle')
+    <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}">
 @endpush

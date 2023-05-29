@@ -4,7 +4,7 @@ namespace App\View\Components\Form;
 
 use Illuminate\View\Component;
 
-class SelectCustom extends Component
+class Select2 extends Component
 {
     public $name;
     public $value;
