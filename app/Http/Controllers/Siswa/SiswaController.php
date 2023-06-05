@@ -19,9 +19,17 @@ class SiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
+        $siswa = null;
+        $user = auth()->user();
+        if (strtolower($user->roles[0]->name) === "siswa") {
+            $siswa = Siswa::with('smk', 'kelas', 'user')->where('user_id', $user->id)->paginate(10);
+        } else {
+            $siswa = Siswa::with('smk', 'kelas', 'user')->paginate(10);
+        }
         $data = [
-            'siswa' => Siswa::with('smk', 'kelas', 'user')->paginate(10)
+            'siswa' => $siswa,
         ];
         return view('users.siswa.index', $data);
     }
@@ -95,6 +103,7 @@ class SiswaController extends Controller
      */
     public function edit($nisn)
     {
+
         $data = [
             'agama' => ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu'],
             'smk' => Smk::all(),

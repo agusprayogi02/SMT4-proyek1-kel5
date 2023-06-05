@@ -18,7 +18,14 @@ class DaftarMagangController extends Controller
      */
     public function index()
     {
-        $magang = DaftarMagang::with('siswa', 'dudi', 'guru', 'keahlian')->where('status', '!=', 'editing')->paginate(10);
+        $user = auth()->user();
+        if (strtolower($user->roles[0]->name) === "siswa") {
+            $siswa = Siswa::where('user_id', auth()->user()->id)->first();
+            $magang = DaftarMagang::with('siswa', 'dudi', 'guru', 'keahlian')->where('status', '!=', 'editing')->where('siswa_id', '=', $siswa->nisn)->paginate(10);
+            return view('magang.index-siswa', ['magang' => $magang]);
+        } else {
+            $magang = DaftarMagang::with('siswa', 'dudi', 'guru', 'keahlian')->paginate(10);
+        }
         return view('magang.index-siswa', ['magang' => $magang]);
     }
 
@@ -30,13 +37,13 @@ class DaftarMagangController extends Controller
     public function create()
     {
         $user = auth()->user()->id;
-        $siswa = Siswa::with('smk')->where('user_id', '=', $user)->first();
+        $siswa = Siswa::where('user_id', '=', $user)->first();
         $data = [
             "siswa" => $siswa,
             "dudi" => Dudi::all(),
-            "guru" => Guru::with('smk')->where('smk_id', '=', $siswa->smk->npsn)->get(),
+            "guru" => Guru::with('smk')->where('smk_id', '=', $siswa->smk_id)->get(),
             "keahlian" => Keahlian::all(),
-            'magang' => DaftarMagang::with('siswa', 'dudi', 'guru', 'keahlian')->where('status', '!=', 'editing')->first()
+            'magang' => DaftarMagang::with('siswa', 'dudi', 'guru', 'keahlian')->where('status', '!=', 'editing')->where('siswa_id', '=', $siswa->nisn)->first()
         ];
         return view('magang.form', $data);
     }
@@ -116,16 +123,23 @@ class DaftarMagangController extends Controller
             'alasan' => 'required',
         ]);
         try {
-            $magang = new DaftarMagang($request->all());
-            $siswa = Siswa::find($request->siswa_id);
+            // $magang = new DaftarMagang($request->all());
+            // $siswa = Siswa::find($request->siswa_id);
+            $magang = DaftarMagang::find($id);
+            $magang->update($request->all());
             $dudi = Dudi::find($request->dudi_id);
             $guru = Guru::find($request->guru_id);
             $keahlian = Keahlian::find($request->keahlian_id);
-            $magang->alasan = $request->alasan;
-            $magang->siswa()->associate($siswa);
+            // $magang->alasan = $request->alasan;
+            // $magang->id = $id;
+            // $magang->status = $mg->status;
+            // $magang->rekomendasi = $mg->rekomendasi;
+            // $magang->keterangan = $mg->keterangan;
+            // $magang->siswa()->associate($siswa);
             $magang->dudi()->associate($dudi);
             $magang->guru()->associate($guru);
             $magang->keahlian()->associate($keahlian);
+            // dd($request->all(), $siswa, $dudi, $guru, $keahlian);
             $magang->save();
             return redirect()->route('magang.index')->with('success', 'Data berhasil Mengubah Data');
         } catch (\Throwable $th) {
