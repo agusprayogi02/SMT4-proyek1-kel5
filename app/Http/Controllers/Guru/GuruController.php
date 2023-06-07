@@ -30,8 +30,15 @@ class GuruController extends Controller
      */
     public function index()
     {
+        $guru = null;
+        $user = auth()->user();
+        if (strtolower($user->roles[0]->name) === "guru") {
+            $guru = Guru::with('smk', 'user')->where('user_id', $user->id)->paginate(10);
+        } else {
+            $guru = Guru::with('smk', 'user')->paginate(10);
+        }
         $data = [
-            'guru' => Guru::with('smk', 'user')->paginate(10)
+            'guru' => $guru,
         ];
         return view('users.guru.index', $data);
     }
