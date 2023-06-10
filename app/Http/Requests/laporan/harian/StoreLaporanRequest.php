@@ -24,10 +24,9 @@ class StoreLaporanRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'siswa_id' => 'required|exists:siswas,nisn',
             'tanggal' => 'required|date',
             'kegiatan' => 'required|string',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'keterangan' => 'required|string',
         ];
     }

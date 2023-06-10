@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\laporan\harian\StoreLaporanRequest;
 use App\Http\Requests\laporan\harian\UpdateLaporanRequest;
 use App\Models\LaporanHarian;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Storage;
 
@@ -25,10 +26,15 @@ class LaporanHarianController extends Controller
      */
     public function index()
     {
-        $data = [
-            'laporan' => LaporanHarian::with('siswa')->paginate(10)
-        ];
-        return view('laporan.harian.index', $data);
+        $user = auth()->user();
+        if (strtolower($user->roles[0]->name) === "siswa") {
+            $siswa = Siswa::where('user_id', $user->id)->first();
+            $laporan = LaporanHarian::with('siswa')->where('siswa_id', '=', $siswa->nisn)->paginate(10);
+            return view('laporan.harian.index', ['laporan' => $laporan]);
+        } else {
+            $laporan = LaporanHarian::with('siswa')->paginate(10);
+        }
+        return view('laporan.harian.index', ['laporan' => $laporan]);
     }
 
     /**
@@ -38,7 +44,10 @@ class LaporanHarianController extends Controller
      */
     public function create()
     {
-        return view('laporan.harian.form');
+        $data = [
+            'siswa' => Siswa::all()
+        ];
+        return view('laporan.harian.form', $data);
     }
 
     /**
@@ -57,8 +66,12 @@ class LaporanHarianController extends Controller
                     'image' => $image_name,
                 ]);
             }
+            $laporan = LaporanHarian::create($request->except('photo'));
+            $user = auth()->user();
+            $siswa = Siswa::where('user_id', $user->id)->first();
+            $laporan->siswa()->associate($siswa);
+            $laporan->save();
 
-            LaporanHarian::create($request->all());
             return redirect()->route('laporan.harian.index')->with('success', 'Laporan harian berhasil ditambahkan');
         } catch (\Throwable $th) {
             return redirect()->route('laporan.harian.index')->with('error', 'Laporan harian gagal ditambahkan');

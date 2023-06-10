@@ -9,7 +9,7 @@ class LaporanHarian extends Model
 {
     use HasFactory;
     protected $fillable = [
-        // 'siswa_id',
+        'siswa_id',
         'tanggal',
         'kegiatan',
         'image',
@@ -19,6 +19,6 @@ class LaporanHarian extends Model
     //relasi siswa
     public function siswa()
     {
-        return $this->belongsTo(Siswa::class);
+        return $this->belongsTo(Siswa::class, 'siswa_id', 'nisn');
     }
 }
