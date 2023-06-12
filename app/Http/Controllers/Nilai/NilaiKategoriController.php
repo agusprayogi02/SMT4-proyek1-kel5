@@ -29,7 +29,7 @@ class NilaiKategoriController extends Controller
      */
     public function create()
     {
-        //
+        return view('nilai.kategori.form');
     }
 
     /**
@@ -40,7 +40,14 @@ class NilaiKategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $kategori = new Category();
+            $kategori->name = $request->name;
+            $kategori->save();
+            return redirect()->route('nilai.kategori.index')->with('success', 'Kategori berhasil ditambahkan');
+        } catch (\Throwable $th) {
+            return redirect()->route('nilai.kategori.index')->with('error', 'Kategori gagal ditambahkan');
+        }
     }
 
     /**
@@ -62,7 +69,7 @@ class NilaiKategoriController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('nilai.kategori.form', ['kategori' => Category::find($id)]);
     }
 
     /**
@@ -74,7 +81,14 @@ class NilaiKategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $kategori = Category::find($id);
+            $kategori->name = $request->name;
+            $kategori->save();
+            return redirect()->route('nilai.kategori.index')->with('success', 'Kategori berhasil diubah');
+        } catch (\Throwable $th) {
+            return redirect()->route('nilai.kategori.index')->with('error', 'Kategori gagal diubah');
+        }
     }
 
     /**

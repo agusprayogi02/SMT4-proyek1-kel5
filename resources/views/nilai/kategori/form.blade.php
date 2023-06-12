@@ -21,8 +21,7 @@
         <div class="card-body">
           @csrf
           {!! isset($kategori) ? method_field('PUT') : '' !!}
-          <x-form.input name="name" :value="isset($kategori) ? $kategori->name : ''" label="Nama Kategori"
-            @isset($kategori) readonly @endisset />
+          <x-form.input name="name" :value="isset($kategori) ? $kategori->name : ''" label="Nama Kategori" />
         </div>
         <div class="card-footer text-right">
           <button class="btn btn-primary">Submit</button>
