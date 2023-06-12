@@ -104,7 +104,7 @@ class MenuItemSeeder extends Seeder
                 ],
                 [
                     'name' => 'Menu Kategori Nilai',
-                    'route' => 'nilai.kategori',
+                    'route' => 'nilai-kategori',
                     'permission_name' => 'nilai.kategori.index',
                     'menu_group_id' => 5,
                 ],

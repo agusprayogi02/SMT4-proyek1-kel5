@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // nilai
     Route::resource('nilai', NilaiController::class)->names('nilai');
-    Route::resource('nilai/kategori', NilaiKategoriController::class)->names('nilai.kategori');
+    Route::resource('nilai-kategori', NilaiKategoriController::class)->names('nilai.kategori');
 
     // kelas
     Route::resource('kelas', KelasController::class)->names('kelas');

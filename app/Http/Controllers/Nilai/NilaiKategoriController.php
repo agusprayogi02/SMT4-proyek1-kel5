@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Nilai;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class NilaiKategoriController extends Controller
@@ -14,7 +15,11 @@ class NilaiKategoriController extends Controller
      */
     public function index()
     {
-        //
+        $kategori = Category::paginate(10);
+        $data = [
+            'kategori' => $kategori,
+        ];
+        return view('nilai.kategori.index', $data);
     }
 
     /**
@@ -80,6 +85,11 @@ class NilaiKategoriController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Category::find($id)->delete();
+            return redirect()->route('nilai.kategori.index')->with('success', 'Kategori berhasil dihapus');
+        } catch (\Throwable $th) {
+            return redirect()->route('nilai.kategori.index')->with('error', 'Kategori gagal dihapus');
+        }
     }
 }
