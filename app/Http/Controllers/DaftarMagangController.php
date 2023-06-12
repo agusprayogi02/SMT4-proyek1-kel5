@@ -25,8 +25,12 @@ class DaftarMagangController extends Controller
             return view('magang.index-siswa', ['magang' => $magang]);
         } else if (strtolower($user->roles[0]->name) === "dudi") {
             $dudi = Dudi::where('user_id', $user->id)->first();
-            $magang = DaftarMagang::with('siswa', 'dudi', 'guru', 'keahlian')->where('dudi_id', '=', $dudi->nib)->paginate(10);
+            $magang = DaftarMagang::with('siswa', 'dudi', 'guru', 'keahlian')->where('status', '!=', 'pending', 'or')->where('status', '!=', 'editing')->where('dudi_id', '=', $dudi->nib)->paginate(10);
             return view('magang.index-dudi', ['magang' => $magang]);
+        } else if (strtolower($user->roles[0]->name) === "guru") {
+            $guru = Guru::where('user_id', $user->id)->first();
+            $magang = DaftarMagang::with('siswa', 'dudi', 'guru', 'keahlian')->where('status', '!=', 'editing')->where('guru_id', '=', $guru->nip)->paginate(10);
+            return view('magang.index-guru', ['magang' => $magang]);
         } else {
             $magang = DaftarMagang::with('siswa', 'dudi', 'guru', 'keahlian')->paginate(10);
         }
@@ -187,6 +191,30 @@ class DaftarMagangController extends Controller
             return response()->json("Berhasil Mengubah data!!", 200);
         } catch (\Throwable $th) {
             return response()->json("Gagal mengubah data!!", 500);
+        }
+    }
+
+    public function ajukan($id)
+    {
+        try {
+            $magang = DaftarMagang::find($id);
+            $magang->status = 'pengajuan';
+            $magang->update();
+            return redirect()->route('magang.index')->with('success', 'Status berhasil diubah');
+        } catch (\Throwable $th) {
+            return redirect()->route('magang.index')->with('error', 'terjadi kesalahan');
+        }
+    }
+
+    public function recom($id)
+    {
+        try {
+            $magang = DaftarMagang::find($id);
+            $magang->rekomendasi = 10;
+            $magang->update();
+            return redirect()->route('magang.index')->with('success', 'Status berhasil diubah');
+        } catch (\Throwable $th) {
+            return redirect()->route('magang.index')->with('error', 'terjadi kesalahan');
         }
     }
 }

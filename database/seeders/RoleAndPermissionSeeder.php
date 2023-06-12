@@ -226,6 +226,8 @@ class RoleAndPermissionSeeder extends Seeder
             'guru.edit',
             'siswa.index',
             'magang.management',
+            'magang.index',
+            'magang.edit',
             'nilai.index',
             'nilai.show',
             'laporan.harian.management',

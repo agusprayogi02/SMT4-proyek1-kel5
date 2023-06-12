@@ -55,9 +55,11 @@
                                     <tbody>
                                         <tr>
                                             <th>No</th>
+                                            <th>Ket</th>
+                                            <th>Nama Siswa</th>
                                             <th>Nama DUDI</th>
-                                            <th>Guru Pembimbing</th>
                                             <th>Bidang</th>
+                                            <th>Alasan</th>
                                             <th>Status</th>
                                             @can('magang.edit')
                                                 <th class="text-right">Action</th>
@@ -66,17 +68,24 @@
                                         @foreach ($magang as $key => $item)
                                             <tr>
                                                 <td>{{ $magang->firstItem() + $key }}</td>
+                                                <td>{!! $item->rekomendasi == 10 ? '<span class="badge badge-danger">Rekomendasi</span>' : '' !!}
+                                                </td>
+                                                <td>{{ $item->siswa->nama }}</td>
                                                 <td>{{ $item->dudi->nama }}</td>
-                                                <td>{{ $item->guru->nama }}</td>
-                                                <td>{{ $item->keahlian->bidang . ' - ' . $item->keahlian->nama }}</td>
+                                                <td>{{ $item->keahlian->nama }}</td>
+                                                <td>{{ $item->alasan }}</td>
                                                 <td>{{ $item->status }}</td>
                                                 @can('magang.edit')
                                                     <td class="text-right">
                                                         <div class="d-flex justify-content-end">
-                                                            <a href="{{ route('magang.edit', $item->id) }}"
-                                                                class="btn btn-sm btn-info btn-icon "><i
-                                                                    class="fas fa-edit"></i>
-                                                                Edit</a>
+                                                            <a href="{{ route('magang.ajukan', $item->id) }}"
+                                                                class="btn btn-sm btn-info btn-icon mr-2"><i
+                                                                    class="fas fa-check"></i>
+                                                                Ajukan Magang</a>
+                                                            <a href="{{ route('magang.recom', $item->id) }}"
+                                                                class="btn btn-sm btn-success btn-icon mr-2"><i
+                                                                    class="fas fa-arrow-up"></i>
+                                                                Rekomendasi</a>
                                                         </div>
                                                     </td>
                                                 @endcan
@@ -115,6 +124,47 @@
                 $(this).prev('label').text(file);
             });
         });
+
+        function reject(id) {
+            Swal.fire({
+                title: 'Beri keterangan',
+                input: 'text',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Look up',
+                showLoaderOnConfirm: true,
+                preConfirm: (ket) => {
+                    return $.ajax({
+                        url: `/magang/${id}/reject`,
+                        type: 'PUT',
+                        data: {
+                            keterangan: ket,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            return response.message;
+                        },
+                        error: function(error) {
+                            Swal.showValidationMessage(
+                                `Request failed: ${error}`
+                            )
+                        }
+                    });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Berhasil',
+                        result.value,
+                        'success'
+                    );
+                    window.location.reload();
+                }
+            });
+        }
     </script>
 @endpush
 

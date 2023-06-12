@@ -58,6 +58,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // magang
     Route::resource('magang', DaftarMagangController::class)->names('magang');
     Route::get('magang/{id}/accept', [DaftarMagangController::class, 'accept'])->name('magang.accept');
+    Route::get('magang/{id}/recom', [DaftarMagangController::class, 'recom'])->name('magang.recom');
+    Route::get('magang/{id}/ajukan', [DaftarMagangController::class, 'ajukan'])->name('magang.ajukan');
+
     Route::put('magang/{id}/reject', [DaftarMagangController::class, 'reject'])->name('magang.reject');
 
     // nilai

@@ -55,6 +55,7 @@
                                     <tbody>
                                         <tr>
                                             <th>No</th>
+                                            <th>Ket</th>
                                             <th>Nama Siswa</th>
                                             <th>Guru Pembimbing</th>
                                             <th>Bidang</th>
@@ -67,6 +68,8 @@
                                         @foreach ($magang as $key => $item)
                                             <tr>
                                                 <td>{{ $magang->firstItem() + $key }}</td>
+                                                <td>{!! $item->rekomendasi == 10 ? '<span class="badge badge-danger">Rekomendasi</span>' : '' !!}
+                                                </td>
                                                 <td>{{ $item->siswa->nama }}</td>
                                                 <td>{{ $item->guru->nama }}</td>
                                                 <td>{{ $item->keahlian->bidang . ' - ' . $item->keahlian->nama }}</td>
@@ -130,7 +133,7 @@
                     autocapitalize: 'off'
                 },
                 showCancelButton: true,
-                confirmButtonText: 'Look up',
+                confirmButtonText: 'Submit',
                 showLoaderOnConfirm: true,
                 preConfirm: (ket) => {
                     return $.ajax({
