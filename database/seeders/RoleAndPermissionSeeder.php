@@ -64,13 +64,13 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'assign.user.create']);
         Permission::create(['name' => 'assign.user.edit']);
 
-        //menu group 
+        //menu group
         Permission::create(['name' => 'menu-group.index']);
         Permission::create(['name' => 'menu-group.create']);
         Permission::create(['name' => 'menu-group.edit']);
         Permission::create(['name' => 'menu-group.destroy']);
 
-        //menu item 
+        //menu item
         Permission::create(['name' => 'menu-item.index']);
         Permission::create(['name' => 'menu-item.create']);
         Permission::create(['name' => 'menu-item.edit']);
@@ -158,7 +158,7 @@ class RoleAndPermissionSeeder extends Seeder
         // Permission::create(['name' => 'keahlian.export']);
 
 
-        // create roles 
+        // create roles
         $role = Role::create(['name' => 'Super-Admin', 'short_name' => 'SA']);
         $roleSmk = Role::create(['name' => 'SMK', 'short_name' => 'SK']);
         $roleDudi = Role::create(['name' => 'DUDI', 'short_name' => 'DD']);
@@ -204,6 +204,8 @@ class RoleAndPermissionSeeder extends Seeder
             'siswa.destroy',
             'smk.index',
             'magang.management',
+            'magang.index',
+            'magang.edit',
             'nilai.index',
             'nilai.create',
             'nilai.edit',

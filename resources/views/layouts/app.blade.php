@@ -135,7 +135,8 @@
                                 class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
                                 @csrf
                             </form>
                         </div>
@@ -172,7 +173,7 @@
     <script src="/assets/js/stisla.js"></script>
 
     <!-- JS Libraies -->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/assets/js/page/modules-sweetalert.js"></script>
 
     <!-- Template JS File -->

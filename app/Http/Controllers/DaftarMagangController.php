@@ -23,6 +23,10 @@ class DaftarMagangController extends Controller
             $siswa = Siswa::where('user_id', auth()->user()->id)->first();
             $magang = DaftarMagang::with('siswa', 'dudi', 'guru', 'keahlian')->where('status', '!=', 'editing')->where('siswa_id', '=', $siswa->nisn)->paginate(10);
             return view('magang.index-siswa', ['magang' => $magang]);
+        } else if (strtolower($user->roles[0]->name) === "dudi") {
+            $dudi = Dudi::where('user_id', $user->id)->first();
+            $magang = DaftarMagang::with('siswa', 'dudi', 'guru', 'keahlian')->where('dudi_id', '=', $dudi->nib)->paginate(10);
+            return view('magang.index-dudi', ['magang' => $magang]);
         } else {
             $magang = DaftarMagang::with('siswa', 'dudi', 'guru', 'keahlian')->paginate(10);
         }
@@ -156,5 +160,33 @@ class DaftarMagangController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function accept($id)
+    {
+        try {
+            $magang = DaftarMagang::find($id);
+            $magang->status = 'diterima';
+            $magang->save();
+            return redirect()->route('magang.index')->with('success', 'Status berhasil diubah');
+        } catch (\Throwable $th) {
+            return redirect()->route('magang.index')->with('error', 'terjadi kesalahan');
+        }
+    }
+
+    public function reject($id, Request $request)
+    {
+        try {
+            $request->validate([
+                'keterangan' => 'required'
+            ]);
+            $magang = DaftarMagang::find($id);
+            $magang->keterangan = $request->keterangan;
+            $magang->status = 'ditolak';
+            $magang->update();
+            return response()->json("Berhasil Mengubah data!!", 200);
+        } catch (\Throwable $th) {
+            return response()->json("Gagal mengubah data!!", 500);
+        }
     }
 }

@@ -4,7 +4,7 @@
     <!-- Main Content -->
     <section class="section">
         <div class="section-header">
-            <h1>Roles and Permission</h1>
+            <h1>Menu Magang</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                 <div class="breadcrumb-item"><a href="#">Components</a></div>
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="section-body">
-            <h2 class="section-title">Assign Role and Permission</h2>
+            <h2 class="section-title">Magang Management</h2>
 
             <div class="row">
                 <div class="col-12">
@@ -23,25 +23,30 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>List Role Assigned To Permission</h4>
+                            <h4>Menu Magang</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('assign.create') }}">Assign
-                                    Permission To Role</a>
+                                @can('magang.create')
+                                    <a class="btn btn-icon icon-left btn-primary" href="{{ route('magang.create') }}">Daftar
+                                        Magang</a>
+                                @endcan
+                                <a class="btn btn-info btn-primary active search"> <i class="fa fa-search"
+                                        aria-hidden="true"></i> Search
+                                    Magang</a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="show-search mb-3" style="display: none">
-                                <form id="search" method="GET" action="{{ route('assign.index') }}">
+                                <form id="search" method="GET" action="{{ route('magang.index') }}">
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
-                                            <label for="role">Role</label>
+                                            <label for="role">Group</label>
                                             <input type="text" name="name" class="form-control" id="name"
-                                                placeholder="Role Name">
+                                                placeholder="Group Name">
                                         </div>
                                     </div>
                                     <div class="text-right">
                                         <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                                        <a class="btn btn-secondary" href="{{ route('assign.index') }}">Reset</a>
+                                        <a class="btn btn-secondary" href="{{ route('magang.index') }}">Reset</a>
                                     </div>
                                 </form>
                             </div>
@@ -49,31 +54,38 @@
                                 <table class="table table-bordered table-md">
                                     <tbody>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>Guard Name</th>
-                                            <th>Permission</th>
-                                            <th class="text-right">Action</th>
+                                            <th>No</th>
+                                            <th>Nama DUDI</th>
+                                            <th>Guru Pembimbing</th>
+                                            <th>Bidang</th>
+                                            <th>Status</th>
+                                            @can('magang.edit')
+                                                <th class="text-right">Action</th>
+                                            @endcan
                                         </tr>
-                                        @foreach ($roles as $key => $role)
+                                        @foreach ($magang as $key => $item)
                                             <tr>
-                                                <td>{{ $roles->firstItem() + $key }}</td>
-                                                <td>{{ $role->name }}</td>
-                                                <td>{{ $role->guard_name }}</td>
-                                                <td>{{ implode(', ', $role->getPermissionNames()->toArray()) }}</td>
-                                                <td class="text-right">
-                                                    <div class="d-flex justify-content-end">
-                                                        <a href="{{ route('assign.edit', $role->id) }}"
-                                                            class="btn btn-sm btn-info btn-icon"><i class="fas fa-edit"></i>
-                                                            Edit</a>
-                                                    </div>
-                                                </td>
+                                                <td>{{ $magang->firstItem() + $key }}</td>
+                                                <td>{{ $item->dudi->nama }}</td>
+                                                <td>{{ $item->guru->nama }}</td>
+                                                <td>{{ $item->keahlian->bidang . ' - ' . $item->keahlian->nama }}</td>
+                                                <td>{{ $item->status }}</td>
+                                                @can('magang.edit')
+                                                    <td class="text-right">
+                                                        <div class="d-flex justify-content-end">
+                                                            <a href="{{ route('magang.edit', $item->id) }}"
+                                                                class="btn btn-sm btn-info btn-icon "><i
+                                                                    class="fas fa-edit"></i>
+                                                                Edit</a>
+                                                        </div>
+                                                    </td>
+                                                @endcan
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-center">
-                                    {{ $roles->withQueryString()->links() }}
+                                    {{ $magang->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>
