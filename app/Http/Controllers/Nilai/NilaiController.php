@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Nilai;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NilaiRequest;
+use App\Models\Dudi;
 use App\Models\Nilai;
+use App\Models\Siswa;
+use Auth;
 use Illuminate\Http\Request;
 
 class NilaiController extends Controller
@@ -42,9 +46,21 @@ class NilaiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NilaiRequest $request)
     {
-        //
+        try {
+            $data = $request->validated();
+            $nilai = Nilai::create($data);
+            $dudi = Dudi::where('user_id', Auth::user()->id)->first();
+            $siswa = Siswa::find($nilai->siswa_id);
+
+            $nilai->dudi()->associate($dudi);
+            $nilai->siswa()->associate($siswa);
+            $nilai->save();
+            return redirect()->route('nilai.index')->with('success', 'Nilai berhasil ditambahkan');
+        } catch (\Throwable $th) {
+            return redirect()->route('nilai.index')->with('error', 'Nilai gagal ditambahkan');
+        }
     }
 
     /**

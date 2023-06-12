@@ -53,4 +53,10 @@ class Siswa extends Model
     {
         return $this->hasMany(DaftarMagang::class, 'siswa_id', 'nisn');
     }
+
+    //relasi one to many with nilai
+    public function nilai()
+    {
+        return $this->hasMany(Nilai::class, 'siswa_id', 'nisn');
+    }
 }

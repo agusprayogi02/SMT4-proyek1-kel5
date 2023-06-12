@@ -31,4 +31,10 @@ class Dudi extends Model
     {
         return $this->hasMany(DaftarMagang::class, 'dudi_id', 'nib');
     }
+
+    // relasi one to many with nilai
+    public function nilai()
+    {
+        return $this->hasMany(Nilai::class, 'dudi_id', 'nib');
+    }
 }
