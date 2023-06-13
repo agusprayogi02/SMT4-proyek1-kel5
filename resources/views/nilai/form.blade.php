@@ -20,13 +20,17 @@
                     <div class="card-body">
                         @csrf
                         {!! isset($nilai) ? method_field('PUT') : '' !!}
-                        <x-form.input name="dudi" :value="isset($nilai) ? $nilai->dudi : ''" label="DUDI" @isset($nilai)
-                            readonly @endisset />
-                        {{-- <x-form.select name="siswa" :init-values="$" :value="isset($nilai) ? $nilai->siswa : ''" label="Siswa" /> --}}
+                        <x-form.select2 name="siswa_id" :value="isset($nilai) ? $nilai->siswa_id : old('siswa_id')" label="Siswa">
+                            @foreach ($siswa as $item)
+                                <option value="{{ $item->nisn }}">
+                                    {{ isset($nilai) ? ($nilai->siswa_id === $item->nisn ? 'selected' : '') : '' }}
+                                    {{ $item->nisn }} - {{ $item->nama }}
+                                </option>
+                            @endforeach
+                        </x-form.select2>
                         {{-- <x-form.input name="name" :value="isset($user) ? $user->name : ''" label="Nama" /> --}}
-                        <x-form.input name="nama_pemilik" :value="isset($nilai) ? $nilai->nama_pemilik : ''" label="Nama Pemilik" />
-                        <x-form.text-area name="alamat" :value="isset($nilai) ? $nilai->alamat : ''" label="Alamat" placeholder="Masukkan Alamat" />
-                        <x-form.input name="no_telp" :value="isset($nilai) ? $nilai->no_telp : ''" label="No Telp" />
+                        <x-form.input type="number" name="total" :value="isset($nilai) ? $nilai->total : old('total')" label="Total" />
+                        <x-form.file-upload type="file" name="sertifikat" label="Sertifikat" :value="isset($nilai) ? $nilai->sertifikat : old('sertifikat')" />
                     </div>
                     <div class="card-footer text-right">
                         <button class="btn btn-primary">Submit</button>

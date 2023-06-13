@@ -37,7 +37,10 @@ class NilaiController extends Controller
      */
     public function create()
     {
-        return view('nilai.form');
+        $data = [
+            'siswa' => Siswa::all(),
+        ];
+        return view('nilai.form', $data);
     }
 
     /**

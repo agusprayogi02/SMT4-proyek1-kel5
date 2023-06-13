@@ -25,7 +25,7 @@ class NilaiRequest extends FormRequest
     {
         return [
             'siswa_id' => 'required|string',
-            'dudi_id' => 'required|string',
+            // 'dudi_id' => 'required|string',
             'avg' => '',
             'total' => '',
             'applied_job' => '',
