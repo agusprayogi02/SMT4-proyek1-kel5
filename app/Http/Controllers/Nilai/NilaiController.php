@@ -55,13 +55,14 @@ class NilaiController extends Controller
             $data = $request->validated();
             $nilai = Nilai::create($data);
             $dudi = Dudi::where('user_id', Auth::user()->id)->first();
-            $siswa = Siswa::find($nilai->siswa_id);
+            $siswa = Siswa::find($request->siswa_id);
 
             $nilai->dudi()->associate($dudi);
             $nilai->siswa()->associate($siswa);
             $nilai->save();
             return redirect()->route('nilai.index')->with('success', 'Nilai berhasil ditambahkan');
         } catch (\Throwable $th) {
+
             return redirect()->route('nilai.index')->with('error', 'Nilai gagal ditambahkan');
         }
     }

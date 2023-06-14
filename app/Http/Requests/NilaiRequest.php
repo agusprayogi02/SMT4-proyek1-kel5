@@ -29,7 +29,7 @@ class NilaiRequest extends FormRequest
             'avg' => '',
             'total' => '',
             'applied_job' => '',
-            'sertifikat' => 'required',
+            'sertifikat' => '',
         ];
     }
 }
