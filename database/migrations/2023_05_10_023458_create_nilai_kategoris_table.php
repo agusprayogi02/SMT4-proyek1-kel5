@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('nilai_id')->constrained('nilais')->restrictOnDelete()->cascadeOnUpdate();
             $table->foreignId('kategori_id')->constrained('categories')->restrictOnDelete()->cascadeOnUpdate();
             $table->integer('nilai');
-            $table->string('keterangan', 200);
+            $table->string('keterangan', 200)->nullable();
             $table->timestamps();
         });
     }

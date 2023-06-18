@@ -6,6 +6,8 @@ use App\Models\Dudi;
 use App\Models\Guru;
 use App\Models\Siswa;
 use App\Models\Smk;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Models\Role;
 
 class Helper
 {
@@ -28,8 +30,28 @@ class Helper
     return route('home');
   }
 
+  function profile(): Model
+  {
+    $role = strtolower(Helper::roleName());
+    if ($role == 'smk') {
+      return Smk::where('user_id', auth()->user()->id)->first();
+    } else if ($role == 'guru') {
+      return Guru::where('user_id', auth()->user()->id)->first();
+    } else if ($role == 'dudi') {
+      return  Dudi::where('user_id', auth()->user()->id)->first();
+    } else if ($role == 'siswa') {
+      return Siswa::where('user_id', auth()->user()->id)->first();
+    }
+    return auth()->user();
+  }
+
   public static function roleName(): string
   {
     return auth()->user()->roles[0]->name;
+  }
+
+  public static function role(): Role
+  {
+    return auth()->user()->roles[0];
   }
 }

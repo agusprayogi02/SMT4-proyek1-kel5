@@ -44,7 +44,7 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', function () {
         return view('home', ['users' => User::get(),]);
-    });
+    })->name('home');
 
     // laporan harian list
     Route::resource('laporan-harian', LaporanHarianController::class)->names('laporan.harian');

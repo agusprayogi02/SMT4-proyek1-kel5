@@ -33,6 +33,6 @@ class DaftarMagang extends Model
 
     public function keahlian()
     {
-        return $this->belongsTo(Keahlian::class);
+        return $this->belongsTo(Keahlian::class, 'keahlian_id', 'id');
     }
 }

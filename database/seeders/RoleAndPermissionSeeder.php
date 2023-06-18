@@ -159,11 +159,11 @@ class RoleAndPermissionSeeder extends Seeder
 
 
         // create roles
-        $role = Role::create(['name' => 'Super-Admin', 'short_name' => 'SA']);
-        $roleSmk = Role::create(['name' => 'SMK', 'short_name' => 'SK']);
-        $roleDudi = Role::create(['name' => 'DUDI', 'short_name' => 'DD']);
-        $roleGuru = Role::create(['name' => 'Guru', 'short_name' => 'GR']);
-        $roleSiswa = Role::create(['name' => 'Siswa', 'short_name' => 'SW']);
+        $role = Role::create(['name' => 'Super-Admin', 'short_name' => 'SA', 'bg_color' => 'bg-danger']);
+        $roleSmk = Role::create(['name' => 'SMK', 'short_name' => 'SK', 'bg_color' => 'bg-primary']);
+        $roleDudi = Role::create(['name' => 'DUDI', 'short_name' => 'DD', 'bg_color' => 'bg-warning']);
+        $roleGuru = Role::create(['name' => 'Guru', 'short_name' => 'GR', 'bg_color' => 'bg-success']);
+        $roleSiswa = Role::create(['name' => 'Siswa', 'short_name' => 'SW', 'bg_color' => 'bg-info']);
 
         // give permission
         $role->givePermissionTo(Permission::all());
@@ -210,6 +210,7 @@ class RoleAndPermissionSeeder extends Seeder
             'nilai.create',
             'nilai.edit',
             'nilai.destroy',
+            'nilai.show',
             'nilai.kategori.index',
             'nilai.kategori.create',
             'nilai.kategori.edit',
