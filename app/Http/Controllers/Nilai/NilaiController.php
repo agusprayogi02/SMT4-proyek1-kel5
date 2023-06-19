@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\Nilai;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NilaiKategoriRequest;
 use App\Http\Requests\NilaiRequest;
+use App\Models\Category;
 use App\Models\Dudi;
 use App\Models\Nilai;
 use App\Models\NilaiKategori;
 use App\Models\Siswa;
+use App\Traits\ApiResponse;
 use Auth;
 use Illuminate\Http\Request;
 
 class NilaiController extends Controller
 {
+    use ApiResponse;
     /**
      * Display a listing of the resource.
      *
@@ -89,8 +93,9 @@ class NilaiController extends Controller
      */
     public function show($id)
     {
-        $kategori = NilaiKategori::with('nilai', 'kategori')->where('nilai_id', $id)->get();
-        return view('nilai.show', compact('kategori'));
+        $kategori = NilaiKategori::with('nilai', 'kategori')->where('nilai_id', $id)->paginate(10);
+        $nilai = Nilai::find($id);
+        return view('nilai.show', compact('kategori', 'nilai'));
     }
 
     /**
@@ -124,6 +129,58 @@ class NilaiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $nilai = Nilai::find($id);
+            $nilai->delete();
+            return redirect()->route('nilai.index')->with('success', 'Nilai berhasil dihapus');
+        } catch (\Throwable $th) {
+            return redirect()->route('nilai.index')->with('error', 'Nilai gagal dihapus');
+        }
+    }
+
+    function select2Categories($id)
+    {
+        $kategori = Category::whereDoesntHave('nilaiKategori', function ($query) use ($id) {
+            $query->where('nilai_id', $id);
+        })->get();
+        return response()->json($kategori);
+    }
+
+    public function nilai($id, NilaiKategoriRequest $request)
+    {
+        $request->validated();
+        $nilai = Nilai::find($id);
+        $kategori = Category::find($request->category_id);
+        $kategoriNilai = NilaiKategori::create([
+            'kategori_id' => $kategori->id,
+            'nilai_id' => $nilai->id,
+            'keterangan' => $request->keterangan,
+            'nilai' => $request->nilai,
+        ]);
+        $kategoriNilai->kategori()->associate($kategori);
+        $kategoriNilai->nilai()->associate($nilai);
+        $kategoriNilai->save();
+        $nKat = NilaiKategori::where('nilai_id', $id)->get();
+        $len = count($nKat);
+        if ($len > 0) {
+            $tot = 0;
+            foreach ($nKat as $value) {
+                $tot += $value->nilai;
+            }
+
+            $nilai->total = $tot;
+            $nilai->avg = $tot / $len;
+            $nilai->save();
+        }
+
+        return $this->apiSuccess($kategoriNilai, 200, "Nilai berhasil ditambahkan");
+        // return $this->apiSuccess($kategoriNilai->load('kategori'));
+    }
+
+    public function deleteNilai($id)
+    {
+        $nilai = NilaiKategori::find($id);
+        $nilai->delete();
+        return redirect()->back()->with('success', 'Nilai berhasil dihapus');
     }
 }

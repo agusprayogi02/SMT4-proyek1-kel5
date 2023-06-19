@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('siswa_id')->references('nisn')->on('siswas')->restrictOnDelete()->cascadeOnUpdate();
             $table->string('dudi_id', 13)->nullable();
             $table->foreign('dudi_id')->references('nib')->on('dudis')->restrictOnDelete()->cascadeOnUpdate();
-            $table->integer('avg')->nullable()->default(0);
+            $table->decimal('avg', 5, 2)->nullable()->default(0);
             $table->integer('total')->nullable()->default(0);
             $table->boolean('applied_job')->default(false);
             $table->string('sertifikat')->nullable();

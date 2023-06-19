@@ -27,7 +27,7 @@
                         <div class="card-header-action">
                             @can('nilai.create')
                             <a class="btn btn-icon icon-left btn-primary" href="{{ route('nilai.create') }}">Buat
-                                Penilaian baru</a>
+                                Penilaian Siswa</a>
                             @endcan
                             {{-- @can('nilai.import')
                             <a class="btn btn-info btn-primary active import">
@@ -94,11 +94,12 @@
                                         @can('nilai.show')
                                         <td class="text-right">
                                             <div class="d-flex justify-content-end">
+
                                                 <a href="{{ route('nilai.show', $item->id) }}"
-                                                    class="btn btn-sm btn-info btn-icon mr-3"><i
-                                                        class="fas fa-edit"></i>
-                                                    Show</a>
-                                                <a href="{{ route('nilai.edit', $item->id) }}"
+                                                    class="btn btn-sm btn-success btn-icon mr-2"><i
+                                                        class="fas fa-eye"></i>
+                                                    Lihat Nilai</a>
+                                                {{-- <a href="{{ route('nilai.edit', $item->id) }}"
                                                     class="btn btn-sm btn-info btn-icon "><i class="fas fa-edit"></i>
                                                     Edit</a>
                                                 <form action="{{ route('nilai.destroy', $item->id) }}" method="POST"
@@ -107,7 +108,7 @@
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <button class="btn btn-sm btn-danger btn-icon confirm-delete">
                                                         <i class="fas fa-times"></i> Delete </button>
-                                                </form>
+                                                </form> --}}
                                             </div>
                                         </td>
                                         @endcan
@@ -151,7 +152,4 @@
             });
         });
 </script>
-@endpush
-
-@push('customStyle')
 @endpush
