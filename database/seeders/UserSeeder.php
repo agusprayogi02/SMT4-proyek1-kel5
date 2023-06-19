@@ -23,38 +23,115 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => "Dhayu Intan Nareswari",
-            'email' => "siswa.dhayu.ntan@gmail.com",
+            'name' => "SMK Negeri 1 Malang",
+            'email' => "smk.mlg1@gmail.com",
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
         ]);
 
         User::create([
-            'name' => "Diah Putri Nofianti",
-            'email' => "smk.diahputr@gmail.com",
+            'name' => "SMK Negeri 1 Kepanjen",
+            'email' => "smk.kpj1@gmail.com",
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'name' => "SMK Negeri 1 Gedangan",
+            'email' => "smk.gdg1@gmail.com",
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'name' => "Afif Nuarizki",
+            'email' => "guru.afif@gmail.com",
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'name' => "Bagus Prasetyo",
+            'email' => "guru.bagus@gmail.com",
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'name' => "Chandra Wijaya",
+            'email' => "guru.chandra@gmail.com",
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'name' => 'Dewi Lestari',
+            'email' => "guru.dewi@gmail.com",
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'name' => 'Eko Prawoto',
+            'email' => "guru.eko@gmail.com",
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'name' => "Dhayu Intan Nareswari",
+            'email' => "siswa.dhayu@gmail.com",
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
         ]);
 
         User::create([
             'name' => "Agus Prayogi",
-            'email' => "agus.apy@gmail.com",
+            'email' => "siswa.agus@gmail.com",
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
         ]);
 
         User::create([
-            'name' => "Dudi PKLand",
-            'email' => "dudi.pkland@gmail.com",
+            'name' => 'Diah Putri Nofianti',
+            'email' => "siswa.diah@gmail.com",
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
         ]);
+
         User::create([
-            'name' => "Abulahab",
-            'email' => "siswa2@gmail.com",
+            'name' => "PT. Indo Ramah Tamah",
+            'email' => "dudi.indora@gmail.com",
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
         ]);
-        // User::factory()->count(10)->create();
+
+        User::create([
+            'name' => "CV. Komputerku",
+            'email' => "dudi.komp@gmail.com",
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'name' => "PT. Indofood",
+            'email' => "dudi.indofo@gmail.com",
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'name' => "PT. Oanindo",
+            'email' => "dudi.oanindo@gmail.com",
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'name' => "Dua Sembilan",
+            'email' => "dudi.29@gmail.com",
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ]);
     }
 }

@@ -18,48 +18,44 @@ class SiswaSeeder extends Seeder
     public function run()
     {
         Siswa::create([
-            'user_id' => 2,
+            'user_id' => 10,
             'kelas_id' => 1,
             'smk_id' => "12345678",
-            'nama' => "Siswa",
+            'nama' => "Dhayu Intan Nareswari",
             'nisn' => "1261323290",
-            'gender' => "L",
-            'tempat_lahir' => "Malang",
-            'tanggal_lahir' => "2000-01-01",
+            'gender' => "P",
+            'tempat_lahir' => "Kebumen",
+            'tanggal_lahir' => "2003-10-14",
             'agama' => "Islam",
-            'alamat' => "Jl. Raya Anoman",
+            'alamat' => "Jl. Raya Arjosari",
             'no_telp' => "08123456789",
         ]);
+
         Siswa::create([
-            'user_id' => 6,
-            'kelas_id' => 1,
+            'user_id' => 11,
+            'kelas_id' => 2,
             'smk_id' => "12345678",
-            'nama' => "Abulahab",
+            'nama' => "Agus Prayogi",
             'nisn' => "1261323291",
             'gender' => "L",
             'tempat_lahir' => "Malang",
-            'tanggal_lahir' => "2000-02-01",
+            'tanggal_lahir' => "2002-08-06",
             'agama' => "Islam",
-            'alamat' => "Jl. Raya gadang",
+            'alamat' => "Jl. Raya Gadang",
             'no_telp' => "08123456779",
         ]);
-        User::create([
-            'name' => fake()->name(),
-            'email' => "siswa3@gmail.com",
-            'password' => Hash::make('password'),
-            'email_verified_at' => now(),
-        ]);
+
         Siswa::create([
-            'user_id' => 7,
-            'kelas_id' => 1,
+            'user_id' => 12,
+            'kelas_id' => 3,
             'smk_id' => "12345678",
-            'nama' => fake()->name(),
+            'nama' => 'Diah Putri Nofianti',
             'nisn' => "1261323678",
-            'gender' => "L",
+            'gender' => "P",
             'tempat_lahir' => "Malang",
-            'tanggal_lahir' => "2000-02-02",
+            'tanggal_lahir' => "2002-11-09",
             'agama' => "Islam",
-            'alamat' => "Jl. Raya gadang",
+            'alamat' => "Jl. Raya Supratman",
             'no_telp' => "08123426779",
         ]);
     }
