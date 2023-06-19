@@ -262,40 +262,28 @@ class RoleAndPermissionSeeder extends Seeder
         $user = User::find(1);
         $user->assignRole('Super-Admin');
 
-        $user = User::find(2);
-        $user->assignRole('SMK');
-        $user = User::find(3);
-        $user->assignRole('SMK');
-        $user = User::find(4);
-        $user->assignRole('SMK');
+        $users = [2, 3, 4];
+        foreach ($users as $userId) {
+            $user = User::find($userId);
+            $user->assignRole('SMK');
+        }
 
-        $user = User::find(5);
-        $user->assignRole('Guru');
-        $user = User::find(6);
-        $user->assignRole('Guru');
-        $user = User::find(7);
-        $user->assignRole('Guru');
-        $user = User::find(8);
-        $user->assignRole('Guru');
-        $user = User::find(9);
-        $user->assignRole('Guru');
+        $users = [5, 6, 7, 8, 9];
+        foreach ($users as $userId) {
+            $user = User::find($userId);
+            $user->assignRole('Guru');
+        }
 
-        $user = User::find(10);
-        $user->assignRole('Siswa');
-        $user = User::find(11);
-        $user->assignRole('Siswa');
-        $user = User::find(12);
-        $user->assignRole('Siswa');
+        $users = [10, 11, 12, 13, 14];
+        foreach ($users as $userId) {
+            $user = User::find($userId);
+            $user->assignRole('Siswa');
+        }
 
-        $user = User::find(13);
-        $user->assignRole('DUDI');
-        $user = User::find(14);
-        $user->assignRole('DUDI');
-        $user = User::find(15);
-        $user->assignRole('DUDI');
-        $user = User::find(16);
-        $user->assignRole('DUDI');
-        $user = User::find(17);
-        $user->assignRole('DUDI');
+        $users = [15, 16, 17, 18, 19, 20];
+        foreach ($users as $userId) {
+            $user = User::find($userId);
+            $user->assignRole('DUDI');
+        }
     }
 }

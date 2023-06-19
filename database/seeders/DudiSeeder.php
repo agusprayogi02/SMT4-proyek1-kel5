@@ -16,8 +16,8 @@ class DudiSeeder extends Seeder
     public function run()
     {
         Dudi::create([
-            'user_id' => 13,
-            'nib' => "74653542",
+            'user_id' => 15,
+            'nib' => "11465354",
             'nama' => "PT. Indo Ramah Tamah",
             'nama_pemilik' => "Dodi Hermanu",
             'alamat' => "Jl. Raya Budiman",
@@ -26,7 +26,7 @@ class DudiSeeder extends Seeder
         ]);
 
         Dudi::create([
-            'user_id' => 14,
+            'user_id' => 16,
             'nib' => "14653542",
             'nama' => "CV. Komputerku",
             'nama_pemilik' => "Fajar Setiawan",
@@ -36,7 +36,7 @@ class DudiSeeder extends Seeder
         ]);
 
         Dudi::create([
-            'user_id' => 15,
+            'user_id' => 17,
             'nib' => "24653542",
             'nama' => "PT. Indofood",
             'nama_pemilik' => "Gatot Subroto",
@@ -46,7 +46,7 @@ class DudiSeeder extends Seeder
         ]);
 
         Dudi::create([
-            'user_id' => 16,
+            'user_id' => 18,
             'nib' => "34653542",
             'nama' => "PT. Oanindo",
             'nama_pemilik' => "Martin Sihombing",
@@ -56,12 +56,22 @@ class DudiSeeder extends Seeder
         ]);
 
         Dudi::create([
-            'user_id' => 17,
+            'user_id' => 19,
             'nib' => "44653542",
             'nama' => "Dua Sembilan",
             'nama_pemilik' => "Galih Mohammad",
             'alamat' => "Jl. Raya Meikarta",
             'no_telp' => "08913456789",
+            'kuota' => 10,
+        ]);
+
+        Dudi::create([
+            'user_id' => 20,
+            'nib' => "54653542",
+            'nama' => "Git Indonesia",
+            'nama_pemilik' => "Maliki Yakimura",
+            'alamat' => "Jl. Malioboro",
+            'no_telp' => "08523156787",
             'kuota' => 10,
         ]);
     }
