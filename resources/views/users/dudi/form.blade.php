@@ -38,7 +38,7 @@
                         @endif
                         <x-form.input name="nama_pemilik" :value="isset($dudi) ? $dudi->nama_pemilik : old('nama_pemilik')" label="Nama Pemilik" />
                         <x-form.text-area name="alamat" :value="isset($dudi) ? $dudi->alamat : old('alamat')" label="Alamat" placeholder="Masukkan Alamat" />
-                        <x-form.input type="number" name="no_telp" :value="isset($dudi) ? $dudi->no_telp : old('no_telp')" label="No Telpon DuDi" />
+                        <x-form.input type="number" name="no_telp" :value="isset($dudi) ? $dudi->no_telp : old('no_telp')" label="No Telp" />
                         <x-form.input type="number" name="kuota" :value="isset($dudi) ? $dudi->kuota : old('kuota')" label="Jumlah Kuota Magang" />
                         <div class="form-group">
                             <label>Keahlian</label>
