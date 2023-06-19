@@ -55,7 +55,7 @@
                                     <tbody>
                                         <tr>
                                             <th>No</th>
-                                            <th>Ket</th>
+                                            {{-- <th>Ket</th> --}}
                                             <th>Nama Siswa</th>
                                             <th>Nama DUDI</th>
                                             <th>Bidang</th>
@@ -68,8 +68,8 @@
                                         @foreach ($magang as $key => $item)
                                             <tr>
                                                 <td>{{ $magang->firstItem() + $key }}</td>
-                                                <td>{!! $item->rekomendasi == 10 ? '<span class="badge badge-danger">Rekomendasi</span>' : '' !!}
-                                                </td>
+                                                {{-- <td>{!! $item->rekomendasi == 10 ? '<span class="badge badge-danger">Rekomendasi</span>' : '' !!}
+                                                </td> --}}
                                                 <td>{{ $item->siswa->nama }}</td>
                                                 <td>{{ $item->dudi->nama }}</td>
                                                 <td>{{ $item->keahlian->nama }}</td>
@@ -77,30 +77,32 @@
                                                 <td>{{ $item->status }}</td>
                                                 @can('magang.edit')
                                                     <td class="text-right">
-                                                        <div class="d-flex justify-content-end">
-                                                            <a href="{{ route('magang.ajukan', $item->id) }}"
-                                                                class="btn btn-sm btn-info btn-icon mr-2"><i
-                                                                    class="fas fa-check"></i>
-                                                                Ajukan Magang</a>
-                                                            <a href="{{ route('magang.recom', $item->id) }}"
+                                                        @if ($item->status === 'pending')
+                                                            <div class="d-flex justify-content-end">
+                                                                <a href="{{ route('magang.ajukan', $item->id) }}"
+                                                                    class="btn btn-sm btn-info btn-icon mr-2"><i
+                                                                        class="fas fa-check"></i>
+                                                                    Ajukan Magang</a>
+                                                        @endif
+                                                        {{-- <a href="{{ route('magang.recom', $item->id) }}"
                                                                 class="btn btn-sm btn-success btn-icon mr-2"><i
                                                                     class="fas fa-arrow-up"></i>
-                                                                Rekomendasi</a>
-                                                        </div>
-                                                    </td>
-                                                @endcan
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                <div class="d-flex justify-content-center">
-                                    {{ $magang->withQueryString()->links() }}
+                                                                Rekomendasi</a> --}}
                                 </div>
+                                </td>
+                            @endcan
+                            </tr>
+                            @endforeach
+                            </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center">
+                                {{ $magang->withQueryString()->links() }}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 @endsection

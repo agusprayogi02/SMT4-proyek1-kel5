@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\laporan\harian\StoreLaporanRequest;
 use App\Http\Requests\laporan\harian\UpdateLaporanRequest;
+use App\Models\Dudi;
+use App\Models\Guru;
 use App\Models\LaporanHarian;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
@@ -31,6 +33,14 @@ class LaporanHarianController extends Controller
             $siswa = Siswa::where('user_id', $user->id)->first();
             $laporan = LaporanHarian::with('siswa')->where('siswa_id', '=', $siswa->nisn)->paginate(10);
             return view('laporan.harian.index', ['laporan' => $laporan]);
+        } else if (strtolower($user->roles[0]->name) === "dudi") {
+            $dudi = Dudi::where('user_id', $user->id)->first();
+            $laporan = LaporanHarian::with('siswa')->paginate(10);
+            return view('laporan.harian.index-dudi', ['laporan' => $laporan]);
+        } else if (strtolower($user->roles[0]->name) === "guru") {
+            $guru = Guru::where('user_id', $user->id)->first();
+            $laporan = LaporanHarian::with('siswa')->paginate(10);
+            return view('laporan.harian.index-dudi', ['laporan' => $laporan]);
         } else {
             $laporan = LaporanHarian::with('siswa')->paginate(10);
         }

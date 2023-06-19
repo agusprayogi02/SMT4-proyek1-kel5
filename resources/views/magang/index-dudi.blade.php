@@ -55,7 +55,6 @@
                                     <tbody>
                                         <tr>
                                             <th>No</th>
-                                            <th>Ket</th>
                                             <th>Nama Siswa</th>
                                             <th>Guru Pembimbing</th>
                                             <th>Bidang</th>
@@ -68,29 +67,28 @@
                                         @foreach ($magang as $key => $item)
                                             <tr>
                                                 <td>{{ $magang->firstItem() + $key }}</td>
-                                                <td>{!! $item->rekomendasi == 10
-                                                    ? '<span
-                                                                                                class="badge badge-danger">Rekomendasi</span>'
-                                                    : '' !!}
-                                                </td>
                                                 <td>{{ $item->siswa->nama }}</td>
                                                 <td>{{ $item->guru->nama }}</td>
                                                 <td>{{ $item->keahlian->bidang . ' - ' . $item->keahlian->nama }}</td>
                                                 <td>{{ $item->alasan }}</td>
                                                 <td>{{ $item->status }}</td>
                                                 @can('magang.edit')
-                                                    <td class="text-right">
-                                                        <div class="d-flex justify-content-end">
-                                                            <a href="{{ route('magang.accept', $item->id) }}"
-                                                                class="btn btn-sm btn-info btn-icon mr-2"><i
-                                                                    class="fas fa-check"></i>
-                                                                Terima</a>
-                                                            <a class="btn btn-sm text-white btn-danger btn-icon"
-                                                                onclick="return reject({{ $item->id }})"><i
-                                                                    class="fas fa-trash"></i>
-                                                                Tolak</a>
-                                                        </div>
-                                                    </td>
+                                                    @if ($item->status == 'diterima' && $item->status == 'ditolak')
+                                                        <td></td>
+                                                    @else
+                                                        <td class="text-right">
+                                                            <div class="d-flex justify-content-end">
+                                                                <a href="{{ route('magang.accept', $item->id) }}"
+                                                                    class="btn btn-sm btn-info btn-icon mr-2"><i
+                                                                        class="fas fa-check"></i>
+                                                                    Terima</a>
+                                                                <a class="btn btn-sm text-white btn-danger btn-icon"
+                                                                    onclick="return reject({{ $item->id }})"><i
+                                                                        class="fas fa-trash"></i>
+                                                                    Tolak</a>
+                                                            </div>
+                                                        </td>
+                                                    @endif
                                                 @endcan
                                             </tr>
                                         @endforeach
