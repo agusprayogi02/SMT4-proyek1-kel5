@@ -73,7 +73,7 @@
                                                 <td>{{ $item->alasan }}</td>
                                                 <td>{{ $item->status }}</td>
                                                 @can('magang.edit')
-                                                    @if ($item->status == 'diterima' && $item->status == 'ditolak')
+                                                    @if ($item->status == 'Diterima' && $item->status == 'Ditolak')
                                                         <td></td>
                                                     @else
                                                         <td class="text-right">

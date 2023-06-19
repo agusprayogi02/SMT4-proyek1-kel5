@@ -22,10 +22,10 @@ return new class extends Migration
             $table->string('guru_id', 18)->nullable();
             $table->foreign('guru_id')->references('nip')->on('gurus')->restrictOnDelete()->cascadeOnUpdate();
             $table->foreignId('keahlian_id')->constrained('keahlians')->restrictOnDelete()->cascadeOnUpdate();
-            $table->enum('status', ['editing', 'pending', 'pengajuan', 'diterima', 'ditolak'])->default('editing');
+            $table->enum('status', ['Editing', 'Pending', 'Pengajuan', 'Diterima', 'Ditolak'])->default('Editing');
             $table->tinyInteger('rekomendasi');
             $table->text('alasan');
-            $table->string('keterangan')->nullable(); /// di isi jika ditolak
+            $table->string('keterangan')->nullable(); /// di isi jika Ditolak
             $table->timestamps();
         });
     }

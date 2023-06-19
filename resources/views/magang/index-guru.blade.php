@@ -77,7 +77,7 @@
                                                 <td>{{ $item->status }}</td>
                                                 @can('magang.edit')
                                                     <td class="text-right">
-                                                        @if ($item->status === 'pending')
+                                                        @if ($item->status === 'Pending')
                                                             <div class="d-flex justify-content-end">
                                                                 <a href="{{ route('magang.ajukan', $item->id) }}"
                                                                     class="btn btn-sm btn-info btn-icon mr-2"><i

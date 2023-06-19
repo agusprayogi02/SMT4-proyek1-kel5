@@ -51,7 +51,7 @@ class NilaiController extends Controller
             })->whereHas('daftarMagang', function ($query) {
                 $dudi = Dudi::where('user_id', Auth::user()->id)->first();
                 $query->where('dudi_id', $dudi->nib);
-                $query->where('status', 'diterima');
+                $query->where('status', 'Diterima');
             })->get(),
         ];
         return view('nilai.form', $data);

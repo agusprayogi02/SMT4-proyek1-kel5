@@ -56,7 +56,7 @@
                             </div>
                             <div class="col-md">
                                 <x-form.text-area name="alasan" :value="isset($magang) ? $magang->alasan : old('alasan')" label="Alasan"
-                                    placeholder="Masukkan Alasan anda untuk bisa diterima magang yang telah dipilih!" />
+                                    placeholder="Masukkan alasan untuk magang yang telah dipilih!" />
                             </div>
                         </div>
                     </div>
