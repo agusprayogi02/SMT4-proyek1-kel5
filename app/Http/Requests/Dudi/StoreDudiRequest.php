@@ -32,6 +32,7 @@ class StoreDudiRequest extends FormRequest
             'alamat' => 'required|string|max:200',
             'no_telp' => 'required|string|max:15',
             'kuota' => 'required|integer',
+            'keahlian' => 'required|array'
         ];
     }
 }

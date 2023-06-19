@@ -37,4 +37,10 @@ class Dudi extends Model
     {
         return $this->hasMany(Nilai::class, 'dudi_id', 'nib');
     }
+
+    // relasi many to many with keahlian
+    public function keahlian()
+    {
+        return $this->belongsToMany(Keahlian::class, 'dudi_keahlians', 'dudi_id', 'keahlian_id');
+    }
 }

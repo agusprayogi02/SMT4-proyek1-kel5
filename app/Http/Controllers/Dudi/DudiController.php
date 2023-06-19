@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dudi\StoreDudiRequest;
 use App\Http\Requests\Dudi\UpdateDudiRequest;
 use App\Models\Dudi;
+use App\Models\DudiKeahlian;
+use App\Models\Keahlian;
 use App\Models\User;
 use Hash;
 
@@ -39,7 +41,8 @@ class DudiController extends Controller
      */
     public function create()
     {
-        return view('users.dudi.form');
+        $keahlian = Keahlian::all();
+        return view('users.dudi.form', compact('keahlian'));
     }
 
     /**
@@ -58,6 +61,8 @@ class DudiController extends Controller
             $user = User::create($data);
             $dudi->user()->associate($user);
             $dudi->save();
+
+            $dudi->keahlian()->attach($request->keahlian);
             $user->assignRole('DUDI');
             return redirect()->route('dudi.index')->with('success', 'Berhasil menambahkan data Dudi');
         } catch (\Throwable $th) {
@@ -86,7 +91,8 @@ class DudiController extends Controller
     {
         try {
             $data = [
-                'dudi' => Dudi::with('user')->where('nib', $id)->firstOrFail()
+                'dudi' => Dudi::with('user')->where('nib', $id)->firstOrFail(),
+                'keahlian' => Keahlian::all(),
             ];
             return view('users.dudi.form', $data);
         } catch (\Throwable $th) {

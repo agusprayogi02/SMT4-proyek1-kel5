@@ -20,4 +20,9 @@ class Keahlian extends Model
     {
         return $this->hasMany(DaftarMagang::class);
     }
+
+    public function dudi()
+    {
+        return $this->belongsToMany(Dudi::class, 'dudi_keahlians', 'keahlian_id', 'dudi_id');
+    }
 }
