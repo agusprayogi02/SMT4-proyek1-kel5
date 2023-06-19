@@ -16,12 +16,30 @@ class SmkSeeder extends Seeder
     public function run()
     {
         Smk::create([
-            'user_id' => 3,
+            'user_id' => 2,
             'npsn' => "12345678",
             'nama' => "SMK Negeri 1 Malang",
             'alamat' => "Jl. Teluk Pacitan",
             'no_telp' => "0341479164",
-            'kepala_sekolah' => "Diah Putri Nofianti",
+            'kepala_sekolah' => "Achmad Fauzi, S.Pd., M.Pd.",
+        ]);
+
+        Smk::create([
+            'user_id' => 3,
+            'npsn' => "22345678",
+            'nama' => "SMK Negeri 1 Kepanjen",
+            'alamat' => "Jl. Panji Raya",
+            'no_telp' => "0341479164",
+            'kepala_sekolah' => "Bambang Sutrisno, S.Pd., M.Pd.",
+        ]);
+
+        Smk::create([
+            'user_id' => 4,
+            'npsn' => "32345678",
+            'nama' => "SMK Negeri 1 Gedangan",
+            'alamat' => "Jl. Keramat Harapan",
+            'no_telp' => "0341479164",
+            'kepala_sekolah' => "Sri Wahyuni, S.Pd., M.Pd.",
         ]);
     }
 }

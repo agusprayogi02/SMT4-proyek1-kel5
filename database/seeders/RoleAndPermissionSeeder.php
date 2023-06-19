@@ -261,13 +261,41 @@ class RoleAndPermissionSeeder extends Seeder
         //assign user id 1 ke super admin
         $user = User::find(1);
         $user->assignRole('Super-Admin');
+
         $user = User::find(2);
-        $user->assignRole('Siswa');
+        $user->assignRole('SMK');
         $user = User::find(3);
         $user->assignRole('SMK');
         $user = User::find(4);
-        $user->assignRole('Guru');
+        $user->assignRole('SMK');
+
         $user = User::find(5);
+        $user->assignRole('Guru');
+        $user = User::find(6);
+        $user->assignRole('Guru');
+        $user = User::find(7);
+        $user->assignRole('Guru');
+        $user = User::find(8);
+        $user->assignRole('Guru');
+        $user = User::find(9);
+        $user->assignRole('Guru');
+
+        $user = User::find(10);
+        $user->assignRole('Siswa');
+        $user = User::find(11);
+        $user->assignRole('Siswa');
+        $user = User::find(12);
+        $user->assignRole('Siswa');
+
+        $user = User::find(13);
+        $user->assignRole('DUDI');
+        $user = User::find(14);
+        $user->assignRole('DUDI');
+        $user = User::find(15);
+        $user->assignRole('DUDI');
+        $user = User::find(16);
+        $user->assignRole('DUDI');
+        $user = User::find(17);
         $user->assignRole('DUDI');
     }
 }
