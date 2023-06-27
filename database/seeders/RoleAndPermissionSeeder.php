@@ -189,8 +189,6 @@ class RoleAndPermissionSeeder extends Seeder
             'kelas.destroy',
             'keahlian.index',
             'keahlian.create',
-            'keahlian.edit',
-            'keahlian.destroy',
         ]);
 
         $roleDudi->givePermissionTo([
@@ -220,8 +218,6 @@ class RoleAndPermissionSeeder extends Seeder
             'edukasi.management',
             'keahlian.index',
             'keahlian.create',
-            'keahlian.edit',
-            'keahlian.destroy',
         ]);
 
         $roleGuru->givePermissionTo([
