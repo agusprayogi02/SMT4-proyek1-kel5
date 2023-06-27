@@ -36,12 +36,14 @@
                             <td>{{ $item->nilai }}</td>
                             <td>{{ $item->keterangan }}</td>
                             <td>
-
+                                @can('nilai.edit')
                                 <form action="{{ route('nilai.delNilai', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm btn-icon confirm-delete"><i class="fas fa-trash"></i></button>
+                                    <button type="submit" class="btn btn-danger btn-sm btn-icon confirm-delete"><i
+                                            class="fas fa-trash"></i></button>
                                 </form>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach
@@ -49,8 +51,11 @@
                 </table>
             </div>
             <div class="card-footer text-right">
-                <button type="button" data-toggle="modal" data-target="#myModal" data-id="123" class="btn btn-sm btn-primary btn-icon mr-2"><i class="fas fa-plus"></i>
+                @can('nilai.create')
+                <button type="button" data-toggle="modal" data-target="#myModal" data-id="123"
+                    class="btn btn-sm btn-primary btn-icon mr-2"><i class="fas fa-plus"></i>
                     Beri Nilai</button>
+                @endcan
                 <a class="btn btn-secondary" href="{{ route('nilai.index') }}">Back</a>
             </div>
         </div>
