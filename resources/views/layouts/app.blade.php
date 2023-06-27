@@ -23,7 +23,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
-<body class="sidebar-mini">
+<body class="sidebar">
     <div id="app">
         <div class="main-wrapper">
             <div class="navbar-bg {{ Helper::role()->bg_color }}"></div>

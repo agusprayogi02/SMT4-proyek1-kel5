@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Http\Requests\laporan\harian\StoreLaporanRequest;
 use App\Http\Requests\laporan\harian\UpdateLaporanRequest;
+use App\Models\DaftarMagang;
 use App\Models\Dudi;
 use App\Models\Guru;
 use App\Models\LaporanHarian;

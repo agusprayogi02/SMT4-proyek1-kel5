@@ -11,47 +11,47 @@ use Spatie\Permission\Models\Role;
 
 class Helper
 {
-  public static function  profileLink(): string
-  {
-    $role = strtolower(Helper::roleName());
-    if ($role == 'smk') {
-      $smk = Smk::where('user_id', auth()->user()->id)->first();
-      return route('smk.edit', $smk->npsn);
-    } else if ($role == 'guru') {
-      $guru = Guru::where('user_id', auth()->user()->id)->first();
-      return route('guru.edit', $guru->nip);
-    } else if ($role == 'dudi') {
-      $dudi = Dudi::where('user_id', auth()->user()->id)->first();
-      return route('dudi.edit', $dudi->nib);
-    } else if ($role == 'siswa') {
-      $siswa = Siswa::where('user_id', auth()->user()->id)->first();
-      return route('siswa.edit', $siswa->nisn);
+    public static function  profileLink(): string
+    {
+        $role = strtolower(Helper::roleName());
+        if ($role == 'smk') {
+            $smk = Smk::where('user_id', auth()->user()->id)->first();
+            return route('smk.edit', $smk->npsn);
+        } else if ($role == 'guru') {
+            $guru = Guru::where('user_id', auth()->user()->id)->first();
+            return route('guru.edit', $guru->nip);
+        } else if ($role == 'dudi') {
+            $dudi = Dudi::where('user_id', auth()->user()->id)->first();
+            return route('dudi.edit', $dudi->nib);
+        } else if ($role == 'siswa') {
+            $siswa = Siswa::where('user_id', auth()->user()->id)->first();
+            return route('siswa.edit', $siswa->nisn);
+        }
+        return route('home');
     }
-    return route('home');
-  }
 
-  function profile(): Model
-  {
-    $role = strtolower(Helper::roleName());
-    if ($role == 'smk') {
-      return Smk::where('user_id', auth()->user()->id)->first();
-    } else if ($role == 'guru') {
-      return Guru::where('user_id', auth()->user()->id)->first();
-    } else if ($role == 'dudi') {
-      return  Dudi::where('user_id', auth()->user()->id)->first();
-    } else if ($role == 'siswa') {
-      return Siswa::where('user_id', auth()->user()->id)->first();
+    public static function profile(): Model
+    {
+        $role = strtolower(Helper::roleName());
+        if ($role == 'smk') {
+            return Smk::where('user_id', auth()->user()->id)->first();
+        } else if ($role == 'guru') {
+            return Guru::where('user_id', auth()->user()->id)->first();
+        } else if ($role == 'dudi') {
+            return  Dudi::where('user_id', auth()->user()->id)->first();
+        } else if ($role == 'siswa') {
+            return Siswa::where('user_id', auth()->user()->id)->first();
+        }
+        return auth()->user();
     }
-    return auth()->user();
-  }
 
-  public static function roleName(): string
-  {
-    return auth()->user()->roles[0]->name;
-  }
+    public static function roleName(): string
+    {
+        return auth()->user()->roles[0]->name;
+    }
 
-  public static function role(): Role
-  {
-    return auth()->user()->roles[0];
-  }
+    public static function role(): Role
+    {
+        return auth()->user()->roles[0];
+    }
 }
