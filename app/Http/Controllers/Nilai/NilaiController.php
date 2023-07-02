@@ -93,9 +93,30 @@ class NilaiController extends Controller
      */
     public function show($id)
     {
-        $kategori = NilaiKategori::with('nilai', 'kategori')->where('nilai_id', $id)->paginate(10);
         $nilai = Nilai::find($id);
+        $kategori = Category::leftJoin(
+            'nilai_kategoris',
+            function ($join) use ($nilai) {
+                $join->on('categories.id', '=', 'nilai_kategoris.kategori_id')
+                    ->where('nilai_kategoris.nilai_id', '=', $nilai->id);
+            }
+        )->paginate(10);
+
         return view('nilai.show', compact('kategori', 'nilai'));
+    }
+
+    public function listNilai($id)
+    {
+        $nilai = Nilai::find($id);
+        $kategori = Category::leftJoin(
+            'nilai_kategoris',
+            function ($join) use ($nilai) {
+                $join->on('categories.id', '=', 'nilai_kategoris.kategori_id')
+                    ->where('nilai_kategoris.nilai_id', '=', $nilai->id);
+            }
+        )->get();
+        return \DataTables::of($kategori)->addIndexColumn()
+            ->make(true);
     }
 
     /**

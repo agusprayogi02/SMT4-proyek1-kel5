@@ -30,7 +30,8 @@
                         </x-form.select2>
                         {{--
                     <x-form.input name="name" :value="isset($user) ? $user->name : ''" label="Nama" /> --}}
-                        {{-- <x-form.input type="number" name="total" :value="isset($nilai) ? $nilai->total : old('total')"
+                        {{--
+                    <x-form.input type="number" name="total" :value="isset($nilai) ? $nilai->total : old('total')"
                         label="Total" />
                     <x-form.file-upload type="file" name="sertifikat" label="Sertifikat"
                         :value="isset($nilai) ? $nilai->sertifikat : old('sertifikat')" /> --}}
@@ -48,12 +49,12 @@
 @push('customScript')
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script>
-        $(document).ready(function() {
+        $(function() {
             $('.select2').select2();
         });
     </script>
     <script>
-        $(document).ready(function() {
+        $(function() {
             //ganti label berdasarkan nama file
             $('#image').change(function() {
                 var i = $(this).prev('label').clone();
