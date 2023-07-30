@@ -9,8 +9,7 @@ use App\Models\Guru;
 use App\Models\Smk;
 use App\Models\User;
 use Hash;
-use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\TryCatch;
+use Illuminate\Support\Facades\DB;
 
 class GuruController extends Controller
 {
@@ -59,12 +58,13 @@ class GuruController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreGuruRequest $request)
     {
         try {
+            DB::beginTransaction();
             $data = $request->validated();
             $guru = new Guru($data);
 
@@ -76,16 +76,11 @@ class GuruController extends Controller
             $guru->user()->associate($user);
             $guru->save();
             $user->assignRole('Guru');
+            DB::commit();
             return redirect()->route('guru.index')->with('success', 'Berhasil menambahkan data Guru');
-        } catch (\Throwable $th) {
-            $guru = Guru::where('nip', $request->nip)->first();
-            if ($guru) {
-                $guru->delete();
-                $user = User::where('email', $request->nip)->first();
-                if ($user) {
-                    $user->delete();
-                }
-            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+
             return redirect()->route('guru.index')->with('error', 'Gagal menambahkan data Guru');
         }
     }
@@ -93,10 +88,11 @@ class GuruController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public
+    function show($id)
     {
         //
     }
@@ -104,10 +100,11 @@ class GuruController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($nip)
+    public
+    function edit($nip)
     {
         $data = [
             'guru' => Guru::find($nip),
@@ -119,13 +116,15 @@ class GuruController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateGuruRequest $request, $id)
+    public
+    function update(UpdateGuruRequest $request, $id)
     {
         try {
+            DB::beginTransaction();
             $data = $request->validated();
             $guru = Guru::with('user')->where('nip', $id)->firstOrFail();
             $guru->update($data);
@@ -134,8 +133,10 @@ class GuruController extends Controller
                 'name' => $data['nama'],
                 'email' => $data['email'],
             ]);
+            DB::commit();
             return redirect()->route('guru.index')->with('success', 'Data Guru Berhasil Diedit');
         } catch (\Throwable $th) {
+            DB::rollBack();
             return redirect()->route('guru.index')->with('error', 'Data Guru gagal diedit');
         }
     }
@@ -143,18 +144,22 @@ class GuruController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         try {
+            DB::beginTransaction();
             $guru = Guru::with('user')->where('nip', $id)->firstOrFail();
             $guru->user->removeRole('Guru');
             $guru->delete();
             $guru->user->delete();
+            DB::commit();
             return redirect()->route('guru.index')->with('success', 'Data Guru berhasil dihapus');
         } catch (\Throwable $th) {
+            DB::rollBack();
             return redirect()->route('guru.index')->with('error', 'Data Guru gagal dihapus');
         }
     }

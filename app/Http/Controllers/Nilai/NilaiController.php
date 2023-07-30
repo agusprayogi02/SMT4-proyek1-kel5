@@ -13,10 +13,12 @@ use App\Models\Siswa;
 use App\Traits\ApiResponse;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NilaiController extends Controller
 {
     use ApiResponse;
+
     /**
      * Display a listing of the resource.
      *
@@ -60,12 +62,13 @@ class NilaiController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(NilaiRequest $request)
     {
         try {
+            DB::beginTransaction();
             $data = $request->validated();
             $nilai = Nilai::create([
                 'siswa_id' => $data['siswa_id'],
@@ -78,9 +81,10 @@ class NilaiController extends Controller
             $nilai->dudi()->associate($dudi);
             $nilai->siswa()->associate($siswa);
             $nilai->save();
+            DB::commit();
             return redirect()->route('nilai.index')->with('success', 'Nilai berhasil ditambahkan');
         } catch (\Throwable $th) {
-
+            DB::rollBack();
             return redirect()->route('nilai.index')->with('error', 'Nilai gagal ditambahkan');
         }
     }
@@ -88,7 +92,7 @@ class NilaiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -122,7 +126,7 @@ class NilaiController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -133,8 +137,8 @@ class NilaiController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -145,7 +149,7 @@ class NilaiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -169,33 +173,39 @@ class NilaiController extends Controller
 
     public function nilai($id, NilaiKategoriRequest $request)
     {
-        $request->validated();
-        $nilai = Nilai::find($id);
-        $kategori = Category::find($request->category_id);
-        $kategoriNilai = NilaiKategori::create([
-            'kategori_id' => $kategori->id,
-            'nilai_id' => $nilai->id,
-            'keterangan' => $request->keterangan,
-            'nilai' => $request->nilai,
-        ]);
-        $kategoriNilai->kategori()->associate($kategori);
-        $kategoriNilai->nilai()->associate($nilai);
-        $kategoriNilai->save();
-        $nKat = NilaiKategori::where('nilai_id', $id)->get();
-        $len = count($nKat);
-        if ($len > 0) {
-            $tot = 0;
-            foreach ($nKat as $value) {
-                $tot += $value->nilai;
+        try {
+            DB::beginTransaction();
+            $request->validated();
+            $nilai = Nilai::find($id);
+            $kategori = Category::find($request->category_id);
+            $kategoriNilai = NilaiKategori::create([
+                'kategori_id' => $kategori->id,
+                'nilai_id' => $nilai->id,
+                'keterangan' => $request->keterangan,
+                'nilai' => $request->nilai,
+            ]);
+            $kategoriNilai->kategori()->associate($kategori);
+            $kategoriNilai->nilai()->associate($nilai);
+            $kategoriNilai->save();
+            $nKat = NilaiKategori::where('nilai_id', $id)->get();
+            $len = count($nKat);
+            if ($len > 0) {
+                $tot = 0;
+                foreach ($nKat as $value) {
+                    $tot += $value->nilai;
+                }
+
+                $nilai->total = $tot;
+                $nilai->avg = $tot / $len;
+                $nilai->save();
             }
+            DB::commit();
+            return $this->apiSuccess($kategoriNilai, 200, "Nilai berhasil ditambahkan");
+        } catch (\Exception $e) {
+            DB::rollBack();
 
-            $nilai->total = $tot;
-            $nilai->avg = $tot / $len;
-            $nilai->save();
+            return $this->apiError($e, 500);
         }
-
-        return $this->apiSuccess($kategoriNilai, 200, "Nilai berhasil ditambahkan");
-        // return $this->apiSuccess($kategoriNilai->load('kategori'));
     }
 
     public function deleteNilai($id)

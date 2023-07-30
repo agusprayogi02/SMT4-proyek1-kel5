@@ -10,6 +10,7 @@ use App\Models\Smk;
 use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SiswaController extends Controller
 {
@@ -52,42 +53,53 @@ class SiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nisn' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'kelas_id' => 'required',
-            'smk_id' => 'required',
-            'nama' => 'required',
-            'alamat' => 'required',
-            'no_telp' => 'required',
-            'gender' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'agama' => 'required',
-        ]);
-        $siswa = new Siswa($request->except(['_token']));
-        $user = new User();
-        $user->name = $request->nama;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
-        $siswa->user()->associate($user);
-        $siswa->save();
-        $siswa->user->assignRole('Siswa');
-        return redirect('/siswa')
-            ->with('success', 'Data Siswa Berhasil Ditambahkan');
+
+
+        try {
+            DB::beginTransaction();
+            $request->validate([
+                'nisn' => 'required',
+                'email' => 'required|email',
+                'password' => 'required',
+                'kelas_id' => 'required',
+                'smk_id' => 'required',
+                'nama' => 'required',
+                'alamat' => 'required',
+                'no_telp' => 'required',
+                'gender' => 'required',
+                'tempat_lahir' => 'required',
+                'tanggal_lahir' => 'required',
+                'agama' => 'required',
+            ]);
+            $siswa = new Siswa($request->except(['_token']));
+            $user = new User();
+            $user->name = $request->nama;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
+            $siswa->user()->associate($user);
+            $siswa->save();
+            $siswa->user->assignRole('Siswa');
+
+            DB::commit();
+            return redirect('/siswa')
+                ->with('success', 'Data Siswa Berhasil Ditambahkan');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return redirect('/siswa')
+                ->with('error', 'Data Siswa Gagal Ditambahkan');
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -98,7 +110,7 @@ class SiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($nisn)
@@ -116,8 +128,8 @@ class SiswaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateSiswaRequest $request, $id)
@@ -140,7 +152,7 @@ class SiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

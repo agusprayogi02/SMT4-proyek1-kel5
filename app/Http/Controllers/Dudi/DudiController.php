@@ -10,6 +10,7 @@ use App\Models\DudiKeahlian;
 use App\Models\Keahlian;
 use App\Models\User;
 use Hash;
+use Illuminate\Support\Facades\DB;
 
 class DudiController extends Controller
 {
@@ -54,6 +55,7 @@ class DudiController extends Controller
     public function store(StoreDudiRequest $request)
     {
         try {
+            DB::beginTransaction();
             $data = $request->validated();
             $dudi = new Dudi($data);
             $data['password'] = Hash::make($data['password']);
@@ -64,8 +66,10 @@ class DudiController extends Controller
 
             $dudi->keahlian()->attach($request->keahlian);
             $user->assignRole('DUDI');
+            DB::commit();
             return redirect()->route('dudi.index')->with('success', 'Berhasil menambahkan data Dudi');
         } catch (\Throwable $th) {
+            DB::rollBack();
             return redirect()->route('dudi.index')->with('error', 'Gagal menambahkan data Dudi');
         }
     }
@@ -110,6 +114,7 @@ class DudiController extends Controller
     public function update(UpdateDudiRequest $request, $id)
     {
         try {
+            DB::beginTransaction();
             $data = $request->validated();
             $dudi = Dudi::with('user')->where('nib', $id)->firstOrFail();
             $dudi->update($data);
@@ -117,8 +122,10 @@ class DudiController extends Controller
                 'name' => $data['nama'],
                 'email' => $data['email'],
             ]);
+            DB::commit();
             return redirect()->route('dudi.index')->with('success', 'Berhasil mengubah data Dudi');
         } catch (\Throwable $th) {
+            DB::rollBack();
             return redirect()->route('dudi.index')->with('error', 'Gagal mengubah data Dudi');
         }
     }
@@ -132,12 +139,15 @@ class DudiController extends Controller
     public function destroy($id)
     {
         try {
+            DB::beginTransaction();
             $dudi = Dudi::with('user')->where('nib', $id)->firstOrFail();
             $dudi->user->removeRole('DUDI');
             $dudi->delete();
             $dudi->user->delete();
+            DB::commit();
             return redirect()->route('dudi.index')->with('success', 'Berhasil menghapus data Dudi');
         } catch (\Throwable $th) {
+            DB::rollBack();
             return redirect()->route('dudi.index')->with('error', 'Gagal menghapus data Dudi');
         }
     }
